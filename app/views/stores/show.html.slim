@@ -1,0 +1,36 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @store.name
+p
+  strong Alternate name:
+  = @store.alternate_name
+p
+  strong Latitude:
+  = @store.latitude
+p
+  strong Longitude:
+  = @store.longitude
+p
+  strong Address:
+  = @store.address
+p
+  strong Locality:
+  = @store.locality
+p
+  strong State province:
+  = @store.state_province
+p
+  strong Postal code:
+  = @store.postal_code
+p
+  strong Country:
+  = @store.country
+p
+  strong Location description:
+  = @store.location_description
+
+= link_to 'Edit', edit_store_path(@store)
+'|
+= link_to 'Back', stores_path

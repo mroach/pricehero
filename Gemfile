@@ -32,6 +32,14 @@ gem 'slim-rails'
 # Friendly URLs using slugs
 gem 'friendly_id'
 
+# Fancy money and currency handling
+gem 'money-rails'
+
+# Validator for UPC/EAN/GTIN
+gem 'gtin'
+
+gem 'devise'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

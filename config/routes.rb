@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
-  resources :derps
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :stores
+  resources :reports
+  resources :products
+  resources :categories
+  resources :brands
 end

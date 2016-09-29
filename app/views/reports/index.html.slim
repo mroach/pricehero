@@ -1,0 +1,21 @@
+h1 Reports
+
+= link_to 'New Report', new_report_path
+
+table
+  thead
+    tr
+      th Reported at
+      th Product
+      th Store
+      th Price
+      th
+
+  tbody
+    - @reports.each do |report|
+      tr
+        td = link_to l(report.reported_at, format: :short), report
+        td = link_to report.product, report.product
+        td = link_to report.store, report.store
+        td = report.price.format
+        td = link_to 'Destroy', report, data: { confirm: 'Are you sure?' }, method: :delete
