@@ -44,6 +44,9 @@ group :development, :test do
 
   # Acceptance testing
   gem 'capybara'
+
+  # Generates fake test data
+  gem 'faker'
 end
 
 group :development do
@@ -59,12 +62,6 @@ group :development do
   # Spec output formatting
   gem 'fuubar'
 
-  # Object factory
-  gem 'factory_girl_rails'
-
-  # Generates fake test data
-  gem 'faker'
-
   # Automatically run tests when files change
   gem 'guard-rspec', require: false
   gem 'guard-bundler', require: false
@@ -72,6 +69,14 @@ group :development do
 
   # Enforce Ruby coding style
   gem 'rubocop', require: false
+
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'web-console'
+  gem 'listen', '~> 3.0.5'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
@@ -83,13 +88,7 @@ group :test do
 
   # Cleans up the database after tests
   gem 'database_cleaner'
-end
 
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
-  gem 'listen', '~> 3.0.5'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  # Object factory
+  gem 'factory_girl_rails'
 end
