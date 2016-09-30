@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929135129) do
+ActiveRecord::Schema.define(version: 20160929183122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20160929135129) do
     t.integer  "store_id"
     t.datetime "reported_at",                    null: false
     t.integer  "price_cents",    default: 0,     null: false
-    t.string   "price_currency", default: "USD", null: false
+    t.string   "price_currency", default: "THB", null: false
     t.boolean  "out_of_stock"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false

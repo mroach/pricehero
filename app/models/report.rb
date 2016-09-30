@@ -6,7 +6,7 @@ class Report < ApplicationRecord
   belongs_to :product
   belongs_to :store
 
-  monetize :price_cents, numericality: { greater_than: 0 }
+  monetize :price_cents, as: :price, numericality: { greater_than: 0 }
 
   validates :store, presence: true
   validates :product, presence: true
