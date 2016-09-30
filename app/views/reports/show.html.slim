@@ -2,16 +2,17 @@ p#notice = notice
 
 p
   strong Product:
-  = @report.product
+  = link_to @report.product, @report.product
 p
   strong Store:
-  = @report.store
+  = link_to @report.store, @report.store
 p
   strong Reported at:
-  = @report.reported_at
+  = l @report.reported_at, format: :long
 p
   strong Price:
-  = @report.price
+  = @report.price.format
+
 p
   strong Unit Price:
   = @report.unit_price
