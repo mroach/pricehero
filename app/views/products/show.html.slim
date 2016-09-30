@@ -1,11 +1,7 @@
 p#notice = notice
 
-p
-  strong Brand:
-  = @product.brand.name
-p
-  strong Name:
-  = @product.name
+h1 = @product.combined_name
+
 p
   strong Category:
   = link_to @product.category, @product.category
@@ -13,7 +9,7 @@ p
   strong Units:
   = @product.units
 p
-  strong Gtin:
+  strong GTIN:
   = @product.gtin
 
 - if @product.reports.any?

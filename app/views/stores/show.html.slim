@@ -1,17 +1,13 @@
 p#notice = notice
 
-p
-  strong Name:
-  = @store.name
+h1 = @store
+
 p
   strong Alternate name:
   = @store.alternate_name
 p
-  strong Latitude:
-  = @store.latitude
-p
-  strong Longitude:
-  = @store.longitude
+  strong Lat/Lon:
+  = "#{@store.latitude}, #{@store.longitude}"
 p
   strong Address:
   = @store.address
@@ -30,6 +26,23 @@ p
 p
   strong Location description:
   = @store.location_description
+
+- if @store.reports.any?
+  h2 Reports
+  table
+    thead
+      tr
+        th Product
+        th Reported at
+        th Price
+        th Unit Price
+    tbody
+    - @store.reports.each do |report|
+      tr
+        td = link_to report.product, report.product
+        td = l report.reported_at, format: :short
+        td = report.price.format
+        td = report.unit_price
 
 = link_to 'Edit', edit_store_path(@store)
 '|
