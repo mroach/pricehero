@@ -13,4 +13,13 @@ class Report < ApplicationRecord
   validates :reported_at, presence: true
 
   default_scope -> { order('reported_at DESC') }
+
+  def unit_price
+    product_unit = Unit.new(product.units)
+    output_unit = Unit.new(product.category.standard_units)
+    price_scalar = (price.to_f / (product_unit / output_unit)).scalar
+
+    unit_money = Money.new(price_scalar * 100, price.currency)
+    "#{unit_money.format} / #{output_unit}"
+  end
 end

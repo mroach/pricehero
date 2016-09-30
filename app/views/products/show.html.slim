@@ -24,12 +24,14 @@ p
         th Store
         th Reported at
         th Price
+        th Unit Price
     tbody
     - @product.reports.each do |report|
       tr
         td = link_to report.store, report.store
         td = l report.reported_at, format: :short
         td = report.price.format
+        td = report.unit_price
 
 = link_to 'Edit', edit_product_path(@product)
 '|
