@@ -20,6 +20,7 @@ class PricesQuery
       .select('*')
       .from(Arel.sql("(#{ranked_reports_query}) AS ranked_reports"))
       .where('store_price_index = 1')
+      .order('price_cents')
   end
 
   protected
