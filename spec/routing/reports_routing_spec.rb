@@ -6,8 +6,12 @@ RSpec.describe ReportsController, type: :routing do
       expect(get: '/reports').to route_to('reports#index')
     end
 
+    it 'routes to #index' do
+      expect(get: '/products/1/reports').to route_to('reports#index', product_id: '1')
+    end
+
     it 'routes to #new' do
-      expect(get: '/reports/new').to route_to('reports#new')
+      expect(get: '/products/1/reports/new').to route_to('reports#new', product_id: '1')
     end
 
     it 'routes to #show' do
@@ -19,7 +23,7 @@ RSpec.describe ReportsController, type: :routing do
     end
 
     it 'routes to #create' do
-      expect(post: '/reports').to route_to('reports#create')
+      expect(post: '/products/1/reports').to route_to('reports#create', product_id: '1')
     end
 
     it 'routes to #update via PUT' do

@@ -15,8 +15,11 @@ p
   strong GTIN:
   = @product.gtin
 
+h2 Reports
+
+= link_to 'New Report', new_product_report_path(@product)
+
 - if @product.reports.any?
-  h2 Reports
   table
     thead
       tr
@@ -30,7 +33,7 @@ p
     - @product.reports.each do |report|
       tr
         td = link_to report.store, report.store
-        td = l report.reported_at, format: :short
+        td = link_to l(report.reported_at, format: :short), report
         td = report.price.format
         td = report.unit_price
         - if @product.piece_count > 1
