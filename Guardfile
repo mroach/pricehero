@@ -68,6 +68,10 @@ group :red_green_refactor, halt_on_fail: true do
       rspec.spec.call "services/#{m[1]}"
     end
 
+    watch(%r{^app/queries/(.+).rb$}) do |m|
+      rspec.spec.call "queries/#{m[1]}"
+    end
+
     # Capybara features specs
     watch(rails.view_dirs)     { |m| rspec.spec.call("features/#{m[1]}") }
     watch(rails.layouts)       { |m| rspec.spec.call("features/#{m[1]}") }

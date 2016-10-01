@@ -8,6 +8,9 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
+    @prices_query = PricesQuery.new(@product)
+    @best_price = @prices_query.best_price
+    @prices = @prices_query.store_prices
   end
 
   # GET /products/new
