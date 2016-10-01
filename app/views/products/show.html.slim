@@ -6,12 +6,6 @@ p
   strong Category:
   = @product.category.self_and_ancestors.reverse.each.map { |c| link_to(c.name, c).html_safe }.join(' &gt; ').html_safe
 p
-  strong Piece count:
-  = @product.piece_count
-p
-  strong Units:
-  = @product.units
-p
   strong GTIN:
   = @product.gtin
 
