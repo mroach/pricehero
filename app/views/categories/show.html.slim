@@ -2,10 +2,9 @@ p#notice = notice
 
 h1 = @category.name
 
-p
-  strong Parent:
-  div = @category.parent
-  div = @category.self_and_ancestors.collect(&:name).join(' > ')
+div
+  = @category.ancestors.reverse.each.map { |c| link_to(c.name, c).html_safe }.join(' &gt; ').html_safe
+
 p
   strong Bulk units:
   = @category.bulk_units
