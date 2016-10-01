@@ -11,7 +11,7 @@ p
 
 h2 Products
 ul
-  - @category.products.each do |product|
+  - @category.self_and_descendants.collect { |c| c.products }.flatten.each do |product|
     li = link_to product, product
 
 = link_to 'Edit', edit_category_path(@category)
