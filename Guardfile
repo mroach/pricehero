@@ -64,6 +64,10 @@ group :red_green_refactor, halt_on_fail: true do
     watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
     watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
+    watch(%r{^app/services/(.+).rb$}) do |m|
+      rspec.spec.call "services/#{m[1]}"
+    end
+
     # Capybara features specs
     watch(rails.view_dirs)     { |m| rspec.spec.call("features/#{m[1]}") }
     watch(rails.layouts)       { |m| rspec.spec.call("features/#{m[1]}") }

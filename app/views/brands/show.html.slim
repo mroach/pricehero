@@ -11,7 +11,7 @@ h2 Products
 
 ul
 - @brand.products.each do |product|
-  li = link_to product.combined_name, product
+  li = link_to product, product
 
 = link_to 'Edit', edit_brand_path(@brand)
 '|

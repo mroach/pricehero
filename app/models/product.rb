@@ -5,7 +5,7 @@ class Product < ApplicationRecord
 
   acts_as_paranoid
   has_paper_trail
-  friendly_id :combined_name, use: :slugged
+  friendly_id :description, use: :slugged
 
   belongs_to :brand
   belongs_to :category
@@ -18,16 +18,12 @@ class Product < ApplicationRecord
 
   default_scope -> { includes(:brand).order('brands.name, products.name') }
 
-  def combined_name
-    parts = [brand.try(:name), name]
-    parts << "#{piece_count}x" if piece_count > 1
-    parts << units unless units.present? && units.to_unit == Unit.new('1 piece')
-    parts << piece_name.pluralize if piece_count > 1 && !piece_name.blank?
-    parts.join(' ')
+  def description
+    ProductDescription.new(self).description
   end
 
   def to_s
-    combined_name
+    description
   end
 
   protected
