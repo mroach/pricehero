@@ -11,6 +11,7 @@ require 'shoulda/matchers'
 require 'capybara/rails'
 require 'paper_trail/frameworks/rspec'
 require 'money-rails/test_helpers'
+require 'closure_tree/test/matcher'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

@@ -40,7 +40,11 @@ gem 'gtin'
 
 gem 'devise'
 
+# Handles unit conversion
 gem 'ruby-units'
+
+# Model hierarchy. i.e. nested categories
+gem 'closure_tree'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

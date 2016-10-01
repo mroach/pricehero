@@ -1,6 +1,11 @@
 p#notice = notice
 
 h1 = @category.name
+
+p
+  strong Parent:
+  div = @category.parent
+  div = @category.self_and_ancestors.collect(&:name).join(' > ')
 p
   strong Bulk units:
   = @category.bulk_units

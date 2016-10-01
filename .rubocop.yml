@@ -9,6 +9,8 @@ AllCops:
     - db/schema.rb
     - config.ru
     - lib/**/*.rake
+    # Ignore generated migrations
+    - db/migrate/*_create_*_hierarchies.rb
 
 Rails:
   Enabled: true

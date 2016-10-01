@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001032513) do
+ActiveRecord::Schema.define(version: 20161001051449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,17 @@ ActiveRecord::Schema.define(version: 20161001032513) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer  "parent_id"
     t.index ["deleted_at"], name: "index_categories_on_deleted_at", using: :btree
     t.index ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
+  end
+
+  create_table "category_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "category_anc_desc_idx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "category_desc_idx", using: :btree
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

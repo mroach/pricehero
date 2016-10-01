@@ -2,20 +2,5 @@ h1 Categories
 
 = link_to 'New Category', new_category_path
 
-table
-  thead
-    tr
-      th Name
-      th Bulk units
-      th Products
-      th
-      th
-
-  tbody
-    - @categories.each do |category|
-      tr
-        td = link_to category.name, category
-        td = category.bulk_units
-        td = category.products.count
-        td = link_to 'Edit', edit_category_path(category)
-        td = link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete
+- Category.roots.each do |category|
+  = render partial: 'category', locals: { level: 0, category: category }
