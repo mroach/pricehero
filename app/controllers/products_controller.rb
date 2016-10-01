@@ -11,11 +11,12 @@ class ProductsController < ApplicationController
     @prices_query = PricesQuery.new(@product)
     @best_price = @prices_query.best_price
     @prices = @prices_query.store_prices
+    @report = @product.reports.new
   end
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = Product.new(product_params)
   end
 
   # GET /products/1/edit

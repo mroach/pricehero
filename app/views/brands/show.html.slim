@@ -8,6 +8,7 @@ p
   = @brand.country
 
 h2 Products
+= link_to 'Add Product', new_product_path(product: { brand_id: @brand.id })
 
 ul
 - @brand.products.each do |product|

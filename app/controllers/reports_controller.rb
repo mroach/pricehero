@@ -26,7 +26,7 @@ class ReportsController < ApplicationController
     @report.product = @product
 
     if @report.save
-      redirect_to @report, notice: 'Report was successfully created.'
+      redirect_to @product, notice: 'Report was successfully created.'
     else
       render :new
     end

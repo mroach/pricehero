@@ -8,13 +8,13 @@
 
   .field
     = f.label :brand
-    = f.collection_select :brand_id, Brand.all, :id, :name
+    = f.collection_select :brand_id, Brand.all, :id, :name, { include_blank: 'None' }
   .field
     = f.label :name
     = f.text_field :name
   .field
     = f.label :category
-    = f.collection_select :category_id, Category.all, :id, :name
+    = f.collection_select :category_id, Category.all, :id, :name, { include_blank: 'None'}
   .field
     = f.label :piece_count
     = f.number_field :piece_count
