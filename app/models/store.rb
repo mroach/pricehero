@@ -11,7 +11,7 @@ class Store < ApplicationRecord
   validates :name, presence: true
 
   def combined_name
-    [name, locality, state_province, location_description].join(' ')
+    [name, locality, state_province].join(' ')
   end
 
   def to_s
