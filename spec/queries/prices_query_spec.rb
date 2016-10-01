@@ -4,10 +4,10 @@ RSpec.describe PricesQuery do
   describe '#best_price' do
     it 'finds the best price (report)' do
       product = create(:product)
-      report1 = create(:report, product: product, price: 100)
-      report2 = create(:report, product: product, price: 200)
+      create(:report, product: product, price: 100)
+      best_price = create(:report, product: product, price: 90)
 
-      expect(described_class.new(product).best_price).to eq report1
+      expect(described_class.new(product).best_price).to eq best_price
     end
   end
 
