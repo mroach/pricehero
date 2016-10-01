@@ -14,7 +14,21 @@ class Report < ApplicationRecord
 
   default_scope -> { order('reported_at DESC') }
 
+  scope :latest_by_store, -> { from_latest_by_store }
+
   after_initialize :set_defaults, unless: :persisted?
+
+  class << self
+    protected
+
+    def from_latest_by_store
+      from(<<-SQL.strip_heredoc).where(row_number: 1)
+        (SELECT *, ROW_NUMBER() OVER (
+          PARTITION BY product_id, store_id ORDER BY reported_at DESC
+          ) FROM reports) AS reports
+      SQL
+    end
+  end
 
   def unit_price
     calc = UnitPriceCalculator.new(

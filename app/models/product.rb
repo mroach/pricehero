@@ -18,6 +18,10 @@ class Product < ApplicationRecord
 
   default_scope -> { order('name') }
 
+  def prices
+    reports.latest_by_store
+  end
+
   def description
     ProductDescription.new(self).description
   end

@@ -57,4 +57,23 @@ RSpec.describe Product, type: :model do
     it { is_expected.to include product.name }
     it { is_expected.to include product.brand.name }
   end
+
+  describe '#prices' do
+    it 'finds the latest prices per store' do
+      product = create(:product)
+      store1 = create(:store)
+      store2 = create(:store)
+
+      report1 = create(:report, product: product, store: store1, reported_at: 1.day.ago)
+      report2 = create(:report, product: product, store: store2, reported_at: 1.hour.ago)
+      outdated_report = create(:report, product: product, store: store1, reported_at: 2.days.ago)
+
+      reports = product.reports.latest_by_store
+
+      expect(reports.length).to eq 2
+      expect(reports).not_to include outdated_report
+      expect(reports).to include report1
+      expect(reports).to include report2
+    end
+  end
 end
