@@ -10,9 +10,6 @@
     = f.label :store
     = f.collection_select :store_id, Store.all, :id, :combined_name
   .field
-    = f.label :reported_at
-    = f.datetime_select :reported_at
-  .field
     = f.label :price
     = f.text_field :price
   .actions = f.submit

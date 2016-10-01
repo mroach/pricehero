@@ -14,6 +14,8 @@ class Report < ApplicationRecord
 
   default_scope -> { order('reported_at DESC') }
 
+  after_initialize :set_defaults, unless: :persisted?
+
   def unit_price
     calc = UnitPriceCalculator.new(
       price,
@@ -26,5 +28,11 @@ class Report < ApplicationRecord
   def piece_price
     rate = price / product.piece_count
     "#{rate.format} / #{product.piece_name.singularize}"
+  end
+
+  protected
+
+  def set_defaults
+    self.reported_at = Time.now.utc
   end
 end
