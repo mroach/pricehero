@@ -13,12 +13,17 @@ class Product < ApplicationRecord
 
   validates :brand, presence: true
   validates :name, presence: true
+  validates :piece_count, presence: true, numericality: { greater_than: 0 }
   validate :valid_gtin
 
   default_scope -> { includes(:brand).order('brands.name, products.name') }
 
   def combined_name
-    [brand.try(:name), name, units].join(' ')
+    parts = [brand.try(:name), name]
+    parts << "#{piece_count}x" if piece_count > 1
+    parts << units unless units.to_unit == Unit.new('1 piece')
+    parts << piece_name.pluralize if piece_count > 1 && !piece_name.blank?
+    parts.join(' ')
   end
 
   def to_s
@@ -33,6 +38,6 @@ class Product < ApplicationRecord
   end
 
   def should_generate_new_friendly_id?
-    slug.nil? || (changes.keys & %w(brand_id name units)).any?
+    slug.nil? || (changes.keys & %w(brand_id name units piece_count piece_name)).any?
   end
 end

@@ -15,7 +15,16 @@ class Report < ApplicationRecord
   default_scope -> { order('reported_at DESC') }
 
   def unit_price
-    calc = UnitPriceCalculator.new(price, product.units, product.category.standard_units)
+    calc = UnitPriceCalculator.new(
+      price,
+      product.piece_count * product.units.to_unit,
+      product.category.bulk_units
+    )
     "#{calc.unit_price.format} / #{calc.unit_label}"
+  end
+
+  def piece_price
+    rate = price / product.piece_count
+    "#{rate.format} / #{product.piece_name.singularize}"
   end
 end

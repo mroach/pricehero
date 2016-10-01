@@ -16,6 +16,8 @@ RSpec.describe Product, type: :model do
   describe 'Validations' do
     it { is_expected.to validate_presence_of :brand }
     it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_numericality_of(:piece_count).is_greater_than(0) }
+
     describe 'valid_gtin' do
       context 'blank gtin' do
         subject { build(:product, gtin: nil) }

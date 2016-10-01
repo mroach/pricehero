@@ -17,6 +17,11 @@ p
   strong Unit Price:
   = @report.unit_price
 
+- if @report.product.piece_count > 1 && !@report.product.piece_name.blank?
+  p
+    strong Price per #{@report.product.piece_name}
+    = @report.piece_price
+
 = link_to 'Edit', edit_report_path(@report)
 '|
 = link_to 'Back', reports_path

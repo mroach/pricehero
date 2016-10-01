@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929183122) do
+ActiveRecord::Schema.define(version: 20161001032513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 20160929183122) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",           null: false
-    t.string   "standard_units"
+    t.string   "name",       null: false
+    t.string   "bulk_units"
     t.string   "slug"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_categories_on_deleted_at", using: :btree
     t.index ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
@@ -51,14 +51,16 @@ ActiveRecord::Schema.define(version: 20160929183122) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "brand_id"
-    t.string   "name",        null: false
+    t.string   "name",                    null: false
     t.integer  "category_id"
     t.string   "units"
     t.string   "gtin"
     t.string   "slug"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.datetime "deleted_at"
+    t.integer  "piece_count", default: 1, null: false
+    t.string   "piece_name"
     t.index ["brand_id"], name: "index_products_on_brand_id", using: :btree
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
     t.index ["deleted_at"], name: "index_products_on_deleted_at", using: :btree

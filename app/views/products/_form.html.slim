@@ -16,6 +16,12 @@
     = f.label :category
     = f.collection_select :category_id, Category.all, :id, :name
   .field
+    = f.label :piece_count
+    = f.number_field :piece_count
+  .field
+    = f.label :piece_name
+    = f.text_field :piece_name
+  .field
     = f.label :units
     = f.text_field :units
   .field

@@ -6,7 +6,7 @@ table
   thead
     tr
       th Name
-      th Standard units
+      th Bulk units
       th Products
       th
       th
@@ -15,7 +15,7 @@ table
     - @categories.each do |category|
       tr
         td = link_to category.name, category
-        td = category.standard_units
+        td = category.bulk_units
         td = category.products.count
         td = link_to 'Edit', edit_category_path(category)
         td = link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete

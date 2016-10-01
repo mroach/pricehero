@@ -7,6 +7,7 @@ table
     tr
       th Brand
       th Name
+      th Pieces
       th Units
       th Category
       th GTIN
@@ -16,6 +17,7 @@ table
       tr
         td = link_to product.brand.name, product.brand
         td = link_to product.name, product
+        td = product.piece_count == 1 ? "" : product.piece_count
         td = product.units
         td = product.category.name
         td = product.gtin
