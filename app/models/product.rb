@@ -16,7 +16,7 @@ class Product < ApplicationRecord
   validates :piece_count, presence: true, numericality: { greater_than: 0 }
   validate :valid_gtin
 
-  default_scope -> { includes(:brand).order('brands.name, products.name') }
+  default_scope -> { order('name') }
 
   def description
     ProductDescription.new(self).description
