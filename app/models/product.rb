@@ -21,7 +21,7 @@ class Product < ApplicationRecord
   def combined_name
     parts = [brand.try(:name), name]
     parts << "#{piece_count}x" if piece_count > 1
-    parts << units unless units.to_unit == Unit.new('1 piece')
+    parts << units unless units.present? && units.to_unit == Unit.new('1 piece')
     parts << piece_name.pluralize if piece_count > 1 && !piece_name.blank?
     parts.join(' ')
   end
