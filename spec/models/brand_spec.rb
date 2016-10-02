@@ -16,4 +16,14 @@ RSpec.describe Brand, type: :model do
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
   end
+
+  describe '#should_generate_new_friendly_id?' do
+    context 'changing a trigger field' do
+      subject { create(:brand) }
+      it 'updates the slug' do
+        subject.name = Faker::Commerce.department
+        expect { subject.save }.to change(subject, :slug)
+      end
+    end
+  end
 end
