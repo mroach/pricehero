@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   # GET /reports
   def index
-    @reports = params.has_key?(:product_id) ? set_product : Report.all
+    @reports = params.key?(:product_id) ? set_product : Report.all
   end
 
   # GET /reports/1
