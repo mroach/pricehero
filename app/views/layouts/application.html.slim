@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title = [content_for(:title), "Pricehero"].join(' - ')
+    = csrf_meta_tags
+
+  body
+    = render partial: 'layouts/shared/navigation'
+    .pusher
+      main
+        = render partial: 'layouts/shared/messages'
+        == yield
