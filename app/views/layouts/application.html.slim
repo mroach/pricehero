@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title = [content_for(:title), "Pricehero"].join(' - ')
+    title = [content_for(:title), "Pricehero"].reject(&:blank?).join(' - ')
     = csrf_meta_tags
 
   body

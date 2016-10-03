@@ -1,5 +1,3 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    .ui.message class=(name.to_s == 'notice' ? 'positive' : 'negative')
-      i.close.icon
-      div = msg
+    p style="color: white; background-color: #{name.to_s == 'notice' ? 'green' : 'red'}" = msg
