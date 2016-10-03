@@ -10,6 +10,8 @@ class Store < ApplicationRecord
 
   validates :name, presence: true
 
+  default_scope -> { order('name') }
+
   def combined_name
     [name, locality, state_province].join(' ')
   end
