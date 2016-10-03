@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new(product_params)
+    @product = Product.new(params.key?(:product) ? product_params : {})
   end
 
   # GET /products/1/edit
@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def product_params
-    params.permit(:product).permit(
+    params.require(:product).permit(
       %i(
         brand_id name category_id piece_count piece_name units gtin
       )
