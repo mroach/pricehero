@@ -1,0 +1,25 @@
+= form_for @variant do |f|
+  - if @variant.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
+      ul
+        - @variant.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :product_id
+    = f.collection_select :product_id, Product.all, :id, :description
+
+  .field
+    = f.label :piece_count
+    = f.number_field :piece_count
+  .field
+    = f.label :piece_name
+    = f.text_field :piece_name
+  .field
+    = f.label :units
+    = f.text_field :units
+  .field
+    = f.label :gtin
+    = f.text_field :gtin
+  .actions = f.submit

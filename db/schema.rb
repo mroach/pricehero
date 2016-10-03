@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001051449) do
+ActiveRecord::Schema.define(version: 20161003160243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,16 +60,12 @@ ActiveRecord::Schema.define(version: 20161001051449) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "brand_id"
-    t.string   "name",                    null: false
-    t.integer  "category_id"
-    t.string   "units"
-    t.string   "gtin"
+    t.integer  "category_id", null: false
+    t.string   "name",        null: false
     t.string   "slug"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.datetime "deleted_at"
-    t.integer  "piece_count", default: 1, null: false
-    t.string   "piece_name"
     t.index ["brand_id"], name: "index_products_on_brand_id", using: :btree
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
     t.index ["deleted_at"], name: "index_products_on_deleted_at", using: :btree
@@ -77,7 +73,7 @@ ActiveRecord::Schema.define(version: 20161001051449) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer  "product_id"
+    t.integer  "variant_id"
     t.integer  "store_id"
     t.datetime "reported_at",                    null: false
     t.integer  "price_cents",    default: 0,     null: false
@@ -87,9 +83,9 @@ ActiveRecord::Schema.define(version: 20161001051449) do
     t.datetime "updated_at",                     null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_reports_on_deleted_at", using: :btree
-    t.index ["product_id"], name: "index_reports_on_product_id", using: :btree
     t.index ["reported_at"], name: "index_reports_on_reported_at", using: :btree
     t.index ["store_id"], name: "index_reports_on_store_id", using: :btree
+    t.index ["variant_id"], name: "index_reports_on_variant_id", using: :btree
   end
 
   create_table "stores", force: :cascade do |t|
@@ -112,6 +108,20 @@ ActiveRecord::Schema.define(version: 20161001051449) do
     t.index ["slug"], name: "index_stores_on_slug", unique: true, using: :btree
   end
 
+  create_table "variants", force: :cascade do |t|
+    t.string   "units"
+    t.string   "slug"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.datetime "deleted_at"
+    t.integer  "piece_count", default: 1, null: false
+    t.string   "piece_name"
+    t.integer  "product_id",              null: false
+    t.string   "gtin"
+    t.index ["deleted_at"], name: "index_variants_on_deleted_at", using: :btree
+    t.index ["slug"], name: "index_variants_on_slug", unique: true, using: :btree
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",      null: false
     t.integer  "item_id",        null: false
@@ -125,6 +135,7 @@ ActiveRecord::Schema.define(version: 20161001051449) do
 
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
-  add_foreign_key "reports", "products"
   add_foreign_key "reports", "stores"
+  add_foreign_key "reports", "variants"
+  add_foreign_key "variants", "products"
 end

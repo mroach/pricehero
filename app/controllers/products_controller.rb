@@ -8,10 +8,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
-    @prices_query = PricesQuery.new(@product)
-    @best_price = @prices_query.best_price
-    @prices = @prices_query.store_prices
-    @report = @product.reports.new
+    @prices = @product.variants.map { |v| PricesQuery.new(v) }
   end
 
   # GET /products/new
@@ -60,7 +57,7 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(
       %i(
-        brand_id name category_id piece_count piece_name units gtin
+        brand_id name category_id
       )
     )
   end

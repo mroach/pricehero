@@ -8,12 +8,12 @@ RSpec.describe Report, type: :model do
 
   describe 'Associations' do
     it { is_expected.to belong_to :store }
-    it { is_expected.to belong_to :product }
+    it { is_expected.to belong_to :variant }
   end
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of :store }
-    it { is_expected.to validate_presence_of :product }
+    it { is_expected.to validate_presence_of :variant }
     it { is_expected.to validate_presence_of :reported_at }
     it { is_expected.to validate_numericality_of(:price).is_greater_than(0) }
   end

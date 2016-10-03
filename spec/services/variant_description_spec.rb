@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe ProductDescription do
+RSpec.describe VariantDescription do
   let(:brand) { double(Brand, name: 'Acme') }
 
   describe 'brand_name' do
     context 'product with brand' do
       let(:product) { double(Product, brand: brand) }
-      subject { ProductDescription.new(product).brand_name }
+      subject { described_class.new(product).brand_name }
       it { is_expected.to eq brand.name }
     end
 
     context 'product without brand' do
       let(:product) { double(Product, brand: nil) }
-      subject { ProductDescription.new(product).brand_name }
+      subject { described_class.new(product).brand_name }
       it { is_expected.to be_nil }
     end
   end
@@ -21,13 +21,13 @@ RSpec.describe ProductDescription do
   describe 'piece_count' do
     context 'single piece item' do
       let(:product) { double(Product, piece_count: 1) }
-      subject { ProductDescription.new(product).piece_count }
+      subject { described_class.new(product).piece_count }
       it { is_expected.to be_nil }
     end
 
     context 'multi-piece item' do
       let(:product) { double(Product, piece_count: 24) }
-      subject { ProductDescription.new(product).piece_count }
+      subject { described_class.new(product).piece_count }
       it { is_expected.to eq '24x' }
     end
   end
@@ -35,19 +35,19 @@ RSpec.describe ProductDescription do
   describe 'units' do
     context 'item with no units' do
       let(:product) { double(Product, units: nil) }
-      subject { ProductDescription.new(product).units  }
+      subject { described_class.new(product).units  }
       it { is_expected.to be_nil }
     end
 
     context 'item with a unit of one piece' do
       let(:product) { double(Product, units: '1 piece') }
-      subject { ProductDescription.new(product).units }
+      subject { described_class.new(product).units }
       it { is_expected.to be_nil }
     end
 
     context 'item with units other than 1 piece' do
       let(:product) { double(Product, units: '400 mL') }
-      subject { ProductDescription.new(product).units }
+      subject { described_class.new(product).units }
       # For some reason, using 'is_expected.to be_a Unit' fails
       it 'is a Unit' do
         expect(subject.class).to eq Unit
@@ -58,19 +58,19 @@ RSpec.describe ProductDescription do
   describe 'piece_name' do
     context 'with nil piece name' do
       let(:product) { double(Product, piece_count: 1, piece_name: nil) }
-      subject { ProductDescription.new(product).piece_name }
+      subject { described_class.new(product).piece_name }
       it { is_expected.to be_nil }
     end
 
     context 'item with pieces > 1 and a piece name' do
       let(:product) { double(Product, piece_count: 24, piece_name: 'cans') }
-      subject { ProductDescription.new(product).piece_name }
+      subject { described_class.new(product).piece_name }
       it { is_expected.to eq 'cans' }
     end
 
     context 'item with pieces = 1 and a piece name' do
       let(:product) { double(Product, piece_count: 1, piece_name: 'cans') }
-      subject { ProductDescription.new(product).piece_name }
+      subject { described_class.new(product).piece_name }
       it { is_expected.to eq 'can' }
     end
   end
@@ -86,7 +86,7 @@ RSpec.describe ProductDescription do
           units:       '330 mL'
         )
       }
-      subject { ProductDescription.new(product).description }
+      subject { described_class.new(product).description }
 
       it { is_expected.to eq 'Acme Lager 24x 330 ml cans' }
     end

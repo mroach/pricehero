@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  resources :stores
-  resources :products, shallow: true do
-    resources :reports
-  end
-  resources :categories
   resources :brands
-
-  # Allow an indexing of all reports here and in addition to under products
-  resources :reports, only: %i(index)
+  resources :categories
+  resources :stores
+  resources :products
+  resources :variants
+  resources :reports
 end

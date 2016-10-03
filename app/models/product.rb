@@ -9,17 +9,15 @@ class Product < ApplicationRecord
 
   belongs_to :brand
   belongs_to :category
-  has_many :reports, dependent: :destroy
+  has_many :variants, dependent: :destroy
 
   validates :brand, presence: true
   validates :name, presence: true
-  validates :piece_count, presence: true, numericality: { greater_than: 0 }
-  validate :valid_gtin
 
   default_scope -> { order('name') }
 
   def description
-    ProductDescription.new(self).description
+    [brand.try(:name), name].join(' ')
   end
 
   def to_s
@@ -28,12 +26,7 @@ class Product < ApplicationRecord
 
   protected
 
-  def valid_gtin
-    return if gtin.blank?
-    errors.add(:gtin, 'bad checksum') unless gtin.valid_checksum?
-  end
-
   def should_generate_new_friendly_id?
-    slug.nil? || (changes.keys & %w(brand_id name units piece_count piece_name)).any?
+    slug.nil? || (changes.keys & %w(brand_id name)).any?
   end
 end

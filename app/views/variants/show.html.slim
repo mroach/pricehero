@@ -1,0 +1,41 @@
+h1 = @variant
+h2 = link_to @variant.product, @variant.product
+
+p
+  strong GTIN:
+  = @variant.gtin
+
+- if @best_price.present?
+  p
+    strong Best price:
+    = "#{@best_price.price.format} at #{@best_price.store}"
+
+h2 Reports
+
+- if @variant.reports.any?
+  table
+    thead
+      tr
+        th Store
+        th Reported at
+        th Price
+        th Unit Price
+        - if @variant.piece_count > 1
+          th Piece price
+    tbody
+    - @prices.each do |report|
+      tr
+        td = link_to report.store, report.store
+        td = link_to l(report.reported_at, format: :short), report
+        td = report.price.format
+        td = report.unit_price
+        - if @variant.piece_count > 1
+          td = report.piece_price
+
+h3 New price report
+
+= render partial: 'reports/form'
+
+= link_to 'Edit', edit_variant_path(@variant)
+'|
+= link_to 'Back', product_path(@variant.product)

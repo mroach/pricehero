@@ -1,5 +1,4 @@
 class ReportsController < ApplicationController
-  before_action :set_product, only: %i(new create)
   before_action :set_report, only: %i(show edit update destroy)
 
   # GET /reports
@@ -13,7 +12,7 @@ class ReportsController < ApplicationController
 
   # GET /product/:product_id/reports/new
   def new
-    @report = Report.new product: @product
+    @report = Report.new(report_params)
   end
 
   # GET /reports/1/edit
@@ -23,10 +22,9 @@ class ReportsController < ApplicationController
   # POST /product/:product_id/reports
   def create
     @report = Report.new(report_params)
-    @report.product = @product
 
     if @report.save
-      redirect_to @product, notice: 'Report was successfully created.'
+      redirect_to @report.variant, notice: 'Report was successfully created.'
     else
       render :new
     end
@@ -49,10 +47,6 @@ class ReportsController < ApplicationController
 
   private
 
-  def set_product
-    @product = Product.friendly.find params[:product_id]
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_report
     @report = Report.find(params[:id])
@@ -60,6 +54,7 @@ class ReportsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def report_params
-    params.require(:report).permit(:store_id, :reported_at, :price)
+    return {} unless params.key? :report
+    params.require(:report).permit(:store_id, :variant_id, :reported_at, :price)
   end
 end

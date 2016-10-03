@@ -4,40 +4,26 @@ p by #{link_to @product.brand.name, @product.brand} #{Emoji::flag @product.brand
 p
   strong Category:
   = @product.category.self_and_ancestors.reverse.each.map { |c| link_to(c.name, c).html_safe }.join(' &gt; ').html_safe
-p
-  strong GTIN:
-  = @product.gtin
 
-- if @best_price.present?
-  p
-    strong Best price:
-    = "#{@best_price.price.format} at #{@best_price.store}"
+h2 Variants
 
-h2 Reports
+= link_to 'New Variant', new_variant_path(variant: { product_id: @product.id })
 
-- if @product.reports.any?
-  table
-    thead
-      tr
-        th Store
-        th Reported at
-        th Price
-        th Unit Price
-        - if @product.piece_count > 1
-          th Piece price
-    tbody
-    - @prices.each do |report|
-      tr
-        td = link_to report.store, report.store
-        td = link_to l(report.reported_at, format: :short), report
-        td = report.price.format
-        td = report.unit_price
-        - if @product.piece_count > 1
-          td = report.piece_price
-
-h3 New price report
-
-= render partial: 'reports/form'
+table
+  thead
+    tr
+      th Name
+      th Best Price
+      th Unit price
+      th Piece price
+  - @prices.each do |price|
+    tr
+      td = link_to price.variant, price.variant
+      - if price.best_price.present?
+        td #{price.best_price.price.format} at #{price.best_price.store}
+        td = price.best_price.unit_price
+        - if price.variant.piece_count > 1
+          td = price.best_price.piece_price
 
 = link_to 'Edit', edit_product_path(@product)
 '|
