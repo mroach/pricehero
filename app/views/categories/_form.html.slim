@@ -8,7 +8,7 @@
 
   .field
     = f.label :parent_id
-    = f.collection_select :parent_id, Category.all, :id, :name, { include_blank: 'None'}
+    = f.select :parent_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: 'None'}
   .field
     = f.label :name
     = f.text_field :name
