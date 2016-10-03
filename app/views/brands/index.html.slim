@@ -7,11 +7,11 @@ table
     tr
       th Name
       th Country
-      th
+      th Products
 
   tbody
     - @brands.each do |brand|
       tr
         td = link_to brand.name, brand
-        td = brand.country
-        td = link_to 'Destroy', brand, data: { confirm: 'Are you sure?' }, method: :delete
+        td = Emoji.flag brand.country
+        td = brand.products.count

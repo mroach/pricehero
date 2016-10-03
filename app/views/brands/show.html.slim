@@ -1,11 +1,4 @@
-p#notice = notice
-
-p
-  strong Name:
-  = @brand.name
-p
-  strong Country:
-  = @brand.country
+h1 #{@brand.name} #{Emoji.flag @brand.country}
 
 h2 Products
 = link_to 'Add Product', new_product_path(product: { brand_id: @brand.id })

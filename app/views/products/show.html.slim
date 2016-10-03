@@ -1,7 +1,7 @@
 p#notice = notice
 
 h1 = @product
-p by #{link_to @product.brand.name, @product.brand}
+p by #{link_to @product.brand.name, @product.brand} #{Emoji::flag @product.brand.country}
 
 p
   strong Category:
