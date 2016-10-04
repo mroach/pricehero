@@ -1,3 +1,6 @@
+# Generates the full description for a Variant. The name will vary depending on
+# properties of it, such as piece count, units, piece name, etc
+# See the related spec file for example usage and output
 class VariantDescription
   def initialize(variant)
     @variant = variant

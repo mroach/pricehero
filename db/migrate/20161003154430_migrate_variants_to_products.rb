@@ -2,7 +2,8 @@ class MigrateVariantsToProducts < ActiveRecord::Migration[5.0]
   def change
     Variant.all.each do |var|
       product = Product.find_or_create_by!(
-        category: var.category, brand: var.brand, name: var.name)
+        category: var.category, brand: var.brand, name: var.name
+      )
       var.product = product
       var.save!
     end

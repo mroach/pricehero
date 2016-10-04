@@ -35,7 +35,7 @@ RSpec.describe VariantDescription do
   describe 'units' do
     context 'item with no units' do
       let(:product) { double(Product, units: nil) }
-      subject { described_class.new(product).units  }
+      subject { described_class.new(product).units }
       it { is_expected.to be_nil }
     end
 
@@ -79,12 +79,11 @@ RSpec.describe VariantDescription do
     context 'multi-piece product with quantities' do
       let(:product) {
         double(Product,
-          brand:       brand,
-          name:        'Lager',
-          piece_count: 24,
-          piece_name:  'cans',
-          units:       '330 mL'
-        )
+               brand:       brand,
+               name:        'Lager',
+               piece_count: 24,
+               piece_name:  'cans',
+               units:       '330 mL')
       }
       subject { described_class.new(product).description }
 

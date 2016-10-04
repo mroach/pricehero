@@ -1,3 +1,6 @@
+# Represents a specific version of a product. For example a product may be
+# Leo Lager, but the specific variant, the thing you actually purchase, is a
+# 680 mL bottle of Leo Lager, or a 24 pack of 330 mL cans of Leo Lager
 class Variant < ApplicationRecord
   extend FriendlyId
 
