@@ -39,4 +39,8 @@ class UnitPriceCalculator
   def unit_label
     @bulk_units.scalar == 1 ? @bulk_units.units : @bulk_units.to_s
   end
+
+  def to_s
+    "#{unit_price.format} / #{unit_label}"
+  end
 end

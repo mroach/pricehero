@@ -17,12 +17,11 @@ class Report < ApplicationRecord
   after_initialize :set_defaults, unless: :persisted?
 
   def unit_price
-    calc = UnitPriceCalculator.new(
+    UnitPriceCalculator.new(
       price,
       variant.piece_count * variant.units.to_unit,
       variant.category.bulk_units
     )
-    "#{calc.unit_price.format} / #{calc.unit_label}"
   end
 
   def piece_price
