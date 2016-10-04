@@ -11,8 +11,15 @@ h2 Products
 = link_to 'Add Product', new_product_path(product: { category_id: @category.id })
 
 ul
-  - @category.self_and_descendants.collect { |c| c.products }.flatten.each do |product|
+  - @category.products.each do |product|
     li = link_to product, product
+
+h3 Other products
+ul
+  - @category.descendants.collect { |c| c.products }.flatten.each do |product|
+    li
+      = link_to product, product
+      span = "(#{product.category})"
 
 = link_to 'Edit', edit_category_path(@category)
 '|
