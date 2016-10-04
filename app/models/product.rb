@@ -14,7 +14,7 @@ class Product < ApplicationRecord
   validates :brand, presence: true
   validates :name, presence: true
 
-  default_scope -> { order('name') }
+  default_scope -> { includes(:brand).order('brands.name, products.name') }
 
   def description
     [brand.try(:name), name].join(' ')
