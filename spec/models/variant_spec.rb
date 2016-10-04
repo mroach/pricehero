@@ -42,5 +42,27 @@ RSpec.describe Variant, type: :model do
         end
       end
     end
+
+    describe 'valid_units' do
+      context 'acceptable units' do
+        subject { build(:variant, units: '100g') }
+        it { is_expected.to be_valid }
+      end
+
+      context 'blank units' do
+        subject { build(:variant, units: nil) }
+        it { is_expected.not_to be_valid }
+      end
+
+      context 'number without units' do
+        subject { build(:variant, units: '10') }
+        it { is_expected.not_to be_valid }
+        it 'has units in the errors' do
+          subject.valid?
+          expect(subject.errors).to have_key :units
+          expect(subject.errors[:units]).to include 'missing unit of measure'
+        end
+      end
+    end
   end
 end

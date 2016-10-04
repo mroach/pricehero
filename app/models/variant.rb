@@ -13,6 +13,7 @@ class Variant < ApplicationRecord
 
   validates :piece_count, presence: true, numericality: { greater_than: 0 }
   validate :valid_gtin
+  validate :valid_units
 
   delegate :brand, to: :product
   delegate :name, to: :product
@@ -31,5 +32,14 @@ class Variant < ApplicationRecord
   def valid_gtin
     return if gtin.blank?
     errors.add(:gtin, 'bad checksum') unless gtin.valid_checksum?
+  end
+
+  def valid_units
+    begin
+      unit = Unit.new(units)
+    rescue ArgumentError
+      return errors.add(:units, 'invalid')
+    end
+    errors.add(:units, 'missing unit of measure') if unit.units.blank?
   end
 end
