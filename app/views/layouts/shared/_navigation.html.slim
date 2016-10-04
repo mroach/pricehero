@@ -9,3 +9,7 @@ span style="background-color: #ff2"
   = link_to t('nav.brands'), brands_path
   ' ,
   = link_to t('nav.categories'), categories_path
+
+- if user_signed_in?
+  span style="margin-left: 1em" = current_user.name
+  span = link_to 'Log out', destroy_user_session_path

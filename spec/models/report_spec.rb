@@ -9,6 +9,7 @@ RSpec.describe Report, type: :model do
   describe 'Associations' do
     it { is_expected.to belong_to :store }
     it { is_expected.to belong_to :variant }
+    it { is_expected.to belong_to :user }
   end
 
   describe 'Validations' do

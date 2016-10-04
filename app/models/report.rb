@@ -5,6 +5,7 @@ class Report < ApplicationRecord
 
   belongs_to :variant
   belongs_to :store
+  belongs_to :user
 
   monetize :price_cents, as: :price, numericality: { greater_than: 0 }
 

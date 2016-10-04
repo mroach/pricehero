@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161003160243) do
+ActiveRecord::Schema.define(version: 20161004152627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,20 @@ ActiveRecord::Schema.define(version: 20161003160243) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
+    t.jsonb    "info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_identities_on_deleted_at", using: :btree
+    t.index ["provider", "uid"], name: "index_identities_on_provider_and_uid", unique: true, using: :btree
+    t.index ["user_id", "provider"], name: "index_identities_on_user_id_and_provider", unique: true, using: :btree
+    t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
+  end
+
   create_table "products", force: :cascade do |t|
     t.integer  "brand_id"
     t.integer  "category_id", null: false
@@ -82,9 +96,11 @@ ActiveRecord::Schema.define(version: 20161003160243) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.datetime "deleted_at"
+    t.integer  "user_id"
     t.index ["deleted_at"], name: "index_reports_on_deleted_at", using: :btree
     t.index ["reported_at"], name: "index_reports_on_reported_at", using: :btree
     t.index ["store_id"], name: "index_reports_on_store_id", using: :btree
+    t.index ["user_id"], name: "index_reports_on_user_id", using: :btree
     t.index ["variant_id"], name: "index_reports_on_variant_id", using: :btree
   end
 
@@ -106,6 +122,22 @@ ActiveRecord::Schema.define(version: 20161003160243) do
     t.index ["deleted_at"], name: "index_stores_on_deleted_at", using: :btree
     t.index ["name"], name: "index_stores_on_name", using: :btree
     t.index ["slug"], name: "index_stores_on_slug", unique: true, using: :btree
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                            null: false
+    t.string   "encrypted_password",  default: "", null: false
+    t.string   "name",                             null: false
+    t.string   "nickname"
+    t.string   "slug"
+    t.integer  "role",                default: 0,  null: false
+    t.datetime "remember_created_at"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   end
 
   create_table "variants", force: :cascade do |t|
@@ -133,9 +165,11 @@ ActiveRecord::Schema.define(version: 20161003160243) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
 
+  add_foreign_key "identities", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "reports", "stores"
+  add_foreign_key "reports", "users"
   add_foreign_key "reports", "variants"
   add_foreign_key "variants", "products"
 end

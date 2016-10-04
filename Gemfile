@@ -38,8 +38,9 @@ gem 'money-rails'
 # Validator for UPC/EAN/GTIN
 gem 'gtin'
 
+# Authentication
 gem 'devise'
-
+gem 'omniauth-facebook'
 
 # Handles unit conversion
 gem 'ruby-units'

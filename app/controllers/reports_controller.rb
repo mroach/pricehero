@@ -22,6 +22,7 @@ class ReportsController < ApplicationController
   # POST /product/:product_id/reports
   def create
     @report = Report.new(report_params)
+    @report.user = current_user
 
     if @report.save
       redirect_to @report.variant, notice: 'Report was successfully created.'
