@@ -11,5 +11,5 @@
     = f.text_field :name
   .field
     = f.label :country
-    = f.country_select :country
+    = f.country_select :country, { include_blank: 'None' }
   .actions = f.submit

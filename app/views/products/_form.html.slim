@@ -7,11 +7,11 @@
           li = message
   .field
     = f.label :brand
-    = f.collection_select :brand_id, Brand.all, :id, :name, { include_blank: 'None' }
+    = f.collection_select :brand_id, Brand.all, :id, :name, { include_blank: '-- Pick --' }
   .field
     = f.label :name
     = f.text_field :name
   .field
     = f.label :category
-    = f.select :category_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: 'None' }
+    = f.select :category_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: '-- Pick --' }
   .actions = f.submit

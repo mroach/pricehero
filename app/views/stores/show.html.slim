@@ -37,7 +37,7 @@ p
     tbody
     - @store.reports.each do |report|
       tr
-        td = link_to report.product, report.product
+        td = link_to report.variant, report.variant
         td = l report.reported_at, format: :short
         td = report.price.format
         td = report.unit_price
