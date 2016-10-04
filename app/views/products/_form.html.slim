@@ -13,17 +13,5 @@
     = f.text_field :name
   .field
     = f.label :category
-    = f.select :category_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: 'None'}
-  .field
-    = f.label :piece_count
-    = f.number_field :piece_count
-  .field
-    = f.label :piece_name
-    = f.text_field :piece_name
-  .field
-    = f.label :units
-    = f.text_field :units
-  .field
-    = f.label :gtin
-    = f.text_field :gtin
+    = f.select :category_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: 'None' }
   .actions = f.submit
