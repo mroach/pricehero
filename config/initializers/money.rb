@@ -9,7 +9,8 @@ MoneyRails.configure do |config|
 
   # Set default money format globally.
   config.default_format = {
-    no_cents_if_whole: true
+    # We're dealing with baht. We don't care about fractions...
+    no_cents: true
   }
 
   # Set default raise_error_on_money_parsing option
