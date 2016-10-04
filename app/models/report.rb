@@ -26,7 +26,8 @@ class Report < ApplicationRecord
 
   def piece_price
     rate = price / variant.piece_count
-    "#{rate.format} / #{variant.piece_name.singularize}"
+    piece_name = variant.piece_name || 'piece'
+    "#{rate.format} / #{piece_name.singularize}"
   end
 
   protected
