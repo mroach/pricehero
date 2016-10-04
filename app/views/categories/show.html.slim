@@ -7,12 +7,28 @@ p
   strong Bulk units:
   = @category.bulk_units
 
+h2 Sub-categories
+- @category.children.each do |category|
+  = render partial: 'category', locals: { level: 0, category: category }
+
 h2 Products
 = link_to 'Add Product', new_product_path(product: { category_id: @category.id })
 
-ul
-  - @category.products.each do |product|
-    li = link_to product, product
+table
+  thead
+    tr
+      th Name
+      th Best Price
+      th Price per #{@category.bulk_units}
+      th Piece price
+  - @prices.each do |price|
+    tr
+      td = link_to price.variant, price.variant
+      - if price.best_price.present?
+        td #{price.best_price.price.format} at #{price.best_price.store}
+        td style="text-align: right" = price.best_price.unit_price.unit_price.format
+        - if price.variant.piece_count > 1
+          td = price.best_price.piece_price
 
 h3 Other products
 ul

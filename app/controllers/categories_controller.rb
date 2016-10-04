@@ -8,6 +8,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
+    @prices = @category.products.map(&:variants).flatten.map { |v| PricesQuery.new(v) }
   end
 
   # GET /categories/new
