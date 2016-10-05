@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Override the :github shortcut to use SSH to avoid the insecurity of git://
+git_source(:github) { |repo| "git@github.com:#{repo}.git" }
+
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 # Use postgresql as the database for Active Record

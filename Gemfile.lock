@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/rubysherpas/paranoia.git
+  remote: git@github.com:rubysherpas/paranoia.git
   revision: 70f6e37b7b32cf4f70c5b852a38597699f476c62
   branch: rails5
   specs:
