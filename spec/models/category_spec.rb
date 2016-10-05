@@ -23,4 +23,19 @@ RSpec.describe Category, type: :model do
     it { is_expected.to be_a String }
     it { is_expected.to include category.name }
   end
+
+  describe '#should_generate_new_friendly_id?' do
+    {
+      name: -> { Faker::Commerce.product_name },
+    }.each do |k, v|
+      context "changing trigger field '#{k}'" do
+        subject { create(described_class.model_name.singular) }
+        it 'updates the slug' do
+          value = v.is_a?(Proc) ? v.call : v
+          subject.send("#{k}=", value)
+          expect { subject.save }.to change(subject, :slug)
+        end
+      end
+    end
+  end
 end

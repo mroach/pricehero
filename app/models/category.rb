@@ -13,4 +13,10 @@ class Category < ApplicationRecord
   def to_s
     name
   end
+
+  protected
+
+  def should_generate_new_friendly_id?
+    slug.nil? || (changes.keys & %w(name)).any?
+  end
 end

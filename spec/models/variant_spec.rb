@@ -67,7 +67,6 @@ RSpec.describe Variant, type: :model do
   end
 
   describe '#should_generate_new_friendly_id?' do
-
     {
       piece_count: -> { Faker::Number.between(1, 100) },
       piece_name:  -> { %w(bags sachets pieces cans bottles bags jars).sample },
