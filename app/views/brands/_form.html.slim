@@ -18,5 +18,6 @@
       p = image_tag @brand.logo.thumb
       p Replace with new logo:
     = f.file_field :logo
+    = f.hidden_field :logo_cache
 
   .actions = f.submit

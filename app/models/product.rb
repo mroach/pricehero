@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   acts_as_paranoid
   has_paper_trail
   friendly_id :description, use: :slugged
+  mount_uploaders :images, ProductImageUploader
 
   belongs_to :brand
   belongs_to :category
