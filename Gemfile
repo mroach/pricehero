@@ -88,6 +88,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-bundler', require: false
   gem 'guard-rubocop', require: false
+  gem 'guard-pow', require: false
 
   # Enforce Ruby coding style
   gem 'rubocop', require: false
