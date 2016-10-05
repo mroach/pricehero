@@ -249,7 +249,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   config.omniauth :facebook,
                   Rails.application.secrets.facebook_app_id,
-                  Rails.application.secrets.facebook_app_secret
+                  Rails.application.secrets.facebook_app_secret,
+                  scope: 'email,public_profile',
+                  info_fields: 'name,email,first_name,last_name,gender,picture,locale'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
