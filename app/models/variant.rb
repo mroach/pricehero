@@ -42,4 +42,8 @@ class Variant < ApplicationRecord
     end
     errors.add(:units, 'missing unit of measure') if unit.units.blank?
   end
+
+  def should_generate_new_friendly_id?
+    slug.nil? || (changes.keys & %w(piece_count piece_name units product_id)).any?
+  end
 end

@@ -65,4 +65,23 @@ RSpec.describe Variant, type: :model do
       end
     end
   end
+
+  describe '#should_generate_new_friendly_id?' do
+
+    {
+      piece_count: -> { Faker::Number.between(1, 100) },
+      piece_name:  -> { %w(bags sachets pieces cans bottles bags jars).sample },
+      units:       -> { Unit.new("#{Faker::Number.between(10,500)} #{%w(g kg l ml).sample}") },
+      product_id:  -> { FactoryGirl.create(:product).id }
+    }.each do |k, v|
+      context "changing trigger field '#{k}'" do
+        subject { create(described_class.model_name.singular) }
+        it 'updates the slug' do
+          value = v.is_a?(Proc) ? v.call : v
+          subject.send("#{k}=", value)
+          expect { subject.save }.to change(subject, :slug)
+        end
+      end
+    end
+  end
 end
