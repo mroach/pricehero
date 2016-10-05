@@ -8,6 +8,8 @@ p
   = @category.bulk_units
 
 h2 Sub-categories
+p
+  = link_to 'Add Sub-category', new_category_path(category: { parent_id: @category.id })
 - @category.children.each do |category|
   = render partial: 'category', locals: { level: 0, category: category }
 

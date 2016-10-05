@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
-    @category = Category.new
+    @category = Category.new(category_params)
   end
 
   # GET /categories/1/edit
@@ -55,6 +55,7 @@ class CategoriesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def category_params
+    return {} unless params.has_key? :category
     params.require(:category).permit(%i(name bulk_units parent_id))
   end
 end
