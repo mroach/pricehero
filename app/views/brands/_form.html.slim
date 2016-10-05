@@ -12,4 +12,11 @@
   .field
     = f.label :country
     = f.country_select :country, { include_blank: 'None' }
+  .field
+    = f.label :logo
+    - if @brand.logo.present?
+      p = image_tag @brand.logo.thumb
+      p Replace with new logo:
+    = f.file_field :logo
+
   .actions = f.submit

@@ -54,6 +54,6 @@ class BrandsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def brand_params
-    params.require(:brand).permit(:name, :country)
+    params.require(:brand).permit(%i(name country logo))
   end
 end

@@ -1,3 +1,6 @@
+- if @brand.logo.present?
+  = image_tag @brand.logo.medium, alt: @brand.name
+
 h1 #{@brand.name} #{Emoji.flag @brand.country}
 
 h2 Products

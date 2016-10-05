@@ -25,3 +25,6 @@ coverage/
 
 # git secrets
 config/secrets.yml
+
+# Uploads in development mode
+public/uploads

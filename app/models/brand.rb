@@ -8,9 +8,15 @@ class Brand < ApplicationRecord
 
   has_many :products
 
+  mount_uploader :logo, LogoUploader
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   default_scope -> { order('name') }
+
+  def to_s
+    name
+  end
 
   protected
 

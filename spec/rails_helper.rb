@@ -12,6 +12,7 @@ require 'capybara/rails'
 require 'paper_trail/frameworks/rspec'
 require 'money-rails/test_helpers'
 require 'closure_tree/test/matcher'
+require 'carrierwave/test/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
