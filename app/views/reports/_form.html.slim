@@ -9,7 +9,7 @@
   = f.hidden_field :variant_id
   .field
     = f.label :store
-    = f.collection_select :store_id, Store.all, :id, :combined_name, { include_blank: '-- Pick --'}
+    = f.collection_select :store_id, Store.all, :id, :combined_name, { include_blank: '-- Pick --' }
   .field
     = f.label :price
     = f.text_field :price
