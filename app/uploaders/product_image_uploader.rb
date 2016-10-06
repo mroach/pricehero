@@ -22,7 +22,7 @@ class ProductImageUploader < BaseUploader
   end
 
   def filename
-     "#{secure_token}.#{file.extension}" if original_filename.present?
+    "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
   protected

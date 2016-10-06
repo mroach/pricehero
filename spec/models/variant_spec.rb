@@ -70,7 +70,7 @@ RSpec.describe Variant, type: :model do
     {
       piece_count: -> { Faker::Number.between(1, 100) },
       piece_name:  -> { %w(bags sachets pieces cans bottles bags jars).sample },
-      units:       -> { Unit.new("#{Faker::Number.between(10,500)} #{%w(g kg l ml).sample}") },
+      units:       -> { Unit.new("#{Faker::Number.between(10, 500)} #{%w(g kg l ml).sample}") },
       product_id:  -> { FactoryGirl.create(:product).id }
     }.each do |k, v|
       context "changing trigger field '#{k}'" do

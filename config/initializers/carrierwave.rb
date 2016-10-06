@@ -11,7 +11,7 @@ CarrierWave.configure do |config|
     }
     config.fog_directory  = 'pricehero'
     config.fog_public     = true
-    config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
+    config.fog_attributes = { 'Cache-Control' => "max-age=#{365.days.to_i}" }
   else
     config.storage = :file
     config.ignore_integrity_errors = false

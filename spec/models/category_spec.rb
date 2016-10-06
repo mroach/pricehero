@@ -26,7 +26,7 @@ RSpec.describe Category, type: :model do
 
   describe '#should_generate_new_friendly_id?' do
     {
-      name: -> { Faker::Commerce.product_name },
+      name: -> { Faker::Commerce.product_name }
     }.each do |k, v|
       context "changing trigger field '#{k}'" do
         subject { create(described_class.model_name.singular) }
