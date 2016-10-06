@@ -41,7 +41,7 @@ RSpec.describe ProductMedium, type: :model do
     end
 
     its(:content_type) { is_expected.to eq 'image/jpeg' }
-    its(:size) { is_expected.to be > 0 }
+    its(:size) { is_expected.to be_positive }
     its(:size) { is_expected.to eq File.stat(file).size }
   end
 end
