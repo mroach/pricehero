@@ -5,6 +5,7 @@ class CreateProductMedia < ActiveRecord::Migration[5.0]
       t.string     :file,         null: false
       t.string     :content_type, null: false
       t.integer    :size,         null: false, default: 0
+      t.string     :token,        null: false
       t.string     :title
       t.integer    :position
 

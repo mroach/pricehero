@@ -20,4 +20,14 @@ class ProductImageUploader < BaseUploader
   def extension_whitelist
     %w(jpg jpeg gif png)
   end
+
+  def filename
+     "#{secure_token}.#{file.extension}" if original_filename.present?
+  end
+
+  protected
+
+  def secure_token
+    model.token ||= SecureRandom.uuid.delete('-')
+  end
 end

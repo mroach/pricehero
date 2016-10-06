@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProductImageUploader, type: :uploader do
-  let(:product) { double('product', id: 1, to_s: 'Elle & Virre') }
+  let(:product) { double('product', id: 1, to_s: 'Elle & Virre', token: '1234') }
   let(:uploader) { described_class.new(product, :images) }
   let(:sample_file) { File.join(Dir.pwd, 'spec/support/sample_files/1200x1200.png') }
 
@@ -36,6 +36,12 @@ RSpec.describe ProductImageUploader, type: :uploader do
   context 'the large version' do
     it 'scales down a landscape image to fit within 800 by 800 pixels' do
       expect(uploader.large).to be_no_larger_than(800, 800)
+    end
+  end
+
+  context 'filename' do
+    it 'used the token and original extension' do
+      expect(uploader.filename).to eq('1234.png')
     end
   end
 end

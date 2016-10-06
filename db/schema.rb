@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20161006025817) do
     t.string   "file",                     null: false
     t.string   "content_type",             null: false
     t.integer  "size",         default: 0, null: false
+    t.string   "token",                    null: false
     t.string   "title"
     t.integer  "position"
     t.datetime "created_at",               null: false
