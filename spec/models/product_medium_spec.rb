@@ -16,6 +16,19 @@ RSpec.describe ProductMedium, type: :model do
     it { is_expected.to validate_presence_of :file }
   end
 
+  describe 'Scopes' do
+    describe '.images' do
+      it 'filters to image/*' do
+        expect(described_class.images.where_sql).to include "content_type LIKE 'image/%'"
+      end
+    end
+    describe '.videos' do
+      it 'filters to video/*' do
+        expect(described_class.videos.where_sql).to include "content_type LIKE 'video/%'"
+      end
+    end
+  end
+
   describe 'changing the file' do
     subject { described_class.new }
     let(:file) {

@@ -1,3 +1,4 @@
+# One record for every image or perhaps even video attaches to products
 class ProductMedium < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
@@ -10,6 +11,9 @@ class ProductMedium < ApplicationRecord
   validates :file, presence: true
 
   before_save :update_file_attributes
+
+  scope :images, -> { where("content_type LIKE 'image/%'") }
+  scope :videos, -> { where("content_type LIKE 'video/%'") }
 
   protected
 
