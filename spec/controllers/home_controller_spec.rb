@@ -16,7 +16,7 @@ RSpec.describe HomeController, type: :controller do
     end
 
     it 'sets whodunit for PaperTrail' do
-      get :index
+      get :show
       expect(response).to be_success # Ensure the sign-in worked
       expect(PaperTrail.whodunnit).to eq user.id
     end

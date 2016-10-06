@@ -1,61 +1,12 @@
-class CategoriesController < ApplicationController
-  before_action :set_category, only: %i(show edit update destroy)
-
-  # GET /categories
-  def index
-    @categories = Category.all
-  end
-
-  # GET /categories/1
+class CategoriesController < BaseResourcesController
   def show
     @prices = @category.products.map(&:variants).flatten.map { |v| PricesQuery.new(v) }
+    super
   end
 
-  # GET /categories/new
-  def new
-    @category = Category.new(category_params)
-  end
+  protected
 
-  # GET /categories/1/edit
-  def edit
-  end
-
-  # POST /categories
-  def create
-    @category = Category.new(category_params)
-
-    if @category.save
-      redirect_to @category, notice: 'Category was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /categories/1
-  def update
-    if @category.update(category_params)
-      redirect_to @category, notice: 'Category was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /categories/1
-  def destroy
-    @category.destroy
-    redirect_to categories_url, notice: 'Category was successfully destroyed.'
-  end
-
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_category
-    @category = Category.friendly.find(params[:id])
-  end
-
-  # Only allow a trusted parameter "white list" through.
-  def category_params
-    return {} unless params.has_key? :category
-    params.require(:category).permit(%i(name bulk_units parent_id))
+  def permitted_params
+    %i(name bulk_units parent_id)
   end
 end

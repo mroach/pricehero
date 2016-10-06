@@ -45,6 +45,9 @@ gem 'gtin'
 gem 'devise'
 gem 'omniauth-facebook'
 
+# Authorization
+gem 'pundit'
+
 # Handles unit conversion
 gem 'ruby-units'
 

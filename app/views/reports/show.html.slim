@@ -1,6 +1,6 @@
 p
   strong Product:
-  = link_to @report.product, @report.product
+  = link_to @report.variant, @report.variant
 p
   strong Store:
   = link_to @report.store, @report.store
@@ -15,9 +15,9 @@ p
   strong Unit Price:
   = @report.unit_price
 
-- if @report.product.piece_count > 1 && !@report.product.piece_name.blank?
+- if @report.variant.piece_count > 1 && !@report.variant.piece_name.blank?
   p
-    strong Price per #{@report.product.piece_name}
+    strong Price per #{@report.variant.piece_name}
     = @report.piece_price
 
 = link_to 'Edit', edit_report_path(@report)

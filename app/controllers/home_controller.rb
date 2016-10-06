@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
-  def index
+  def show
+    authorize :home, :show?
   end
 end
