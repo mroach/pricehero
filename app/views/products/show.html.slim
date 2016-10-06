@@ -1,4 +1,9 @@
-h1 = @product
+h1
+  = @product
+
+div
+- if @product.brand.logo.present?
+  = image_tag @product.brand.logo.small
 p by #{link_to @product.brand.name, @product.brand} #{Emoji::flag @product.brand.country}
 
 p
