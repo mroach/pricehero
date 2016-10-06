@@ -1,0 +1,31 @@
+h1 Listing product_media
+
+table
+  thead
+    tr
+      th Product
+      th File
+      th Content type
+      th Size
+      th Title
+      th Position
+      th
+      th
+      th
+
+  tbody
+    - @product_media.each do |product_medium|
+      tr
+        td = product_medium.product
+        td = product_medium.file
+        td = product_medium.content_type
+        td = product_medium.size
+        td = product_medium.title
+        td = product_medium.position
+        td = link_to 'Show', product_medium
+        td = link_to 'Edit', edit_product_medium_path(product_medium)
+        td = link_to 'Destroy', product_medium, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Product medium', new_product_medium_path

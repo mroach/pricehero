@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Product:
+  = link_to @product_medium.product, @product_medium.product
+p
+  strong File:
+  = @product_medium.file
+p
+  strong Content type:
+  = @product_medium.content_type
+p
+  strong Size:
+  = @product_medium.size
+p
+  strong Title:
+  = @product_medium.title
+p
+  strong Position:
+  = @product_medium.position
+
+= link_to 'Edit', edit_product_medium_path(@product_medium)
+'|
+= link_to 'Back', product_media_path

@@ -5,13 +5,13 @@ RSpec.describe Product, type: :model do
     it_behaves_like 'a paranoid model'
     it_behaves_like 'a friendly id model'
     it { is_expected.to be_versioned }
-    it { is_expected.to have_uploader :images, ProductImageUploader }
   end
 
   describe 'Associations' do
     it { is_expected.to belong_to :brand }
     it { is_expected.to belong_to :category }
     it { is_expected.to have_many(:variants).dependent(:destroy) }
+    it { is_expected.to have_many(:media) }
   end
 
   describe 'Validations' do

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :stores
   resources :products
+  resources :product_media
   resources :variants
   resources :reports
 end

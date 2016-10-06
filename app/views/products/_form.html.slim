@@ -14,8 +14,8 @@
   .field
     = f.label :category
     = f.select :category_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: '-- Pick --' }
-  .field
-    = f.label :images
-    = f.file_field :images, multiple: true
-    = f.hidden_field :images_cache
   .actions = f.submit
+
+
+- if @product.persisted?
+  p = link_to 'Add image', new_product_medium_path(product_medium: { product_id: @product.id })

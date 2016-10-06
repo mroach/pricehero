@@ -5,9 +5,10 @@ p
   strong Category:
   = @product.category.self_and_ancestors.reverse.each.map { |c| link_to(c.name, c).html_safe }.join(' &gt; ').html_safe
 
-- @product.images.each do |img|
-  = link_to img.large.url do
-    = image_tag img.small.url
+- @product.media.each do |m|
+  = link_to m.file.large.url do
+    = image_tag m.file.small.url
+
 h2 Variants
 
 = link_to 'New Variant', new_variant_path(variant: { product_id: @product.id })
