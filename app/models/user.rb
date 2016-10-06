@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :rememberable, :omniauthable, omniauth_providers: [:facebook]
 
-  enum role: %i(viewer editor admin)
+  enum role: %i(viewer reporter editor admin superuser)
 
   has_many :reports
   has_many :identities, dependent: :destroy
