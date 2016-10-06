@@ -3,6 +3,6 @@ FactoryGirl.define do
     variant
     store
     reported_at { 1.day.ago }
-    price { Money.new(Faker::Commerce.price, 'THB') }
+    price { Money.new(1 + Faker::Commerce.price, 'THB') }
   end
 end

@@ -127,4 +127,7 @@ group :test do
 
   # Object factory
   gem 'factory_girl_rails'
+
+  # Better matchers for Pundit
+  gem 'pundit-matchers', '~> 1.1.0'
 end

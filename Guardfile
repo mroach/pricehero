@@ -64,7 +64,7 @@ group :red_green_refactor, halt_on_fail: true do
     watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
     watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
-    watch(%r{^app/(services|queries|uploaders)/(.+).rb$}) do |m|
+    watch(%r{^app/(services|queries|uploaders|policies)/(.+).rb$}) do |m|
       rspec.spec.call "#{m[1]}/#{m[2]}"
     end
 

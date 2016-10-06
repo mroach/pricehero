@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    user.admin? || user.superuser?
+    user.present? && (user.admin? || user.superuser?)
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    user.admin? || user.superuser?
+    user.present? && (user.admin? || user.superuser?)
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.admin? || user.superuser?
+    user.present? && (user.admin? || user.superuser?)
   end
 
   def scope
@@ -51,4 +51,3 @@ class ApplicationPolicy
     end
   end
 end
-

@@ -1,4 +1,5 @@
 CarrierWave.configure do |config|
+  Fog.mock!
   config.storage = :file
   config.enable_processing = false
 end
