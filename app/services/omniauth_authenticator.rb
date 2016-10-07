@@ -30,6 +30,7 @@ class OmniauthAuthenticator
       user.name = @auth.info.name
       user.nickname = @auth.info.name.downcase.split(/\W/).join('.')
       user.password = Devise.friendly_token[0, 20]
+      user.role = :reporter
     end
   end
 end
