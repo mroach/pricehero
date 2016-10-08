@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
+  let(:factory_name) { described_class.model_name.singular }
+
   describe 'Concerns' do
     it_behaves_like 'a friendly id model'
     it { is_expected.to be_versioned }
@@ -12,9 +14,31 @@ RSpec.describe Category, type: :model do
   end
 
   describe 'Validations' do
-    subject { build(described_class.model_name.singular) }
+    subject { build(factory_name) }
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
+
+    describe 'valid_units' do
+      context 'acceptable units' do
+        subject { build(factory_name, bulk_units: '100g') }
+        it { is_expected.to be_valid }
+      end
+
+      context 'blank units' do
+        subject { build(factory_name, bulk_units: nil) }
+        it { is_expected.to be_valid }
+      end
+
+      context 'number without units' do
+        subject { build(factory_name, bulk_units: '10') }
+        it { is_expected.not_to be_valid }
+        it 'has units in the errors' do
+          subject.valid?
+          expect(subject.errors).to have_key :bulk_units
+          expect(subject.errors[:bulk_units]).to include 'missing unit of measure'
+        end
+      end
+    end
   end
 
   describe '#to_s' do
