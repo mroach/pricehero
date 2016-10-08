@@ -21,6 +21,7 @@ RSpec.describe Variant, type: :model do
   describe 'Validations' do
     subject { build(described_class.model_name.singular) }
     it { is_expected.to validate_numericality_of(:piece_count).is_greater_than(0) }
+    it { is_expected.to validate_presence_of :product }
 
     describe 'valid_gtin' do
       context 'blank gtin' do

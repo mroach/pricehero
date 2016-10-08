@@ -12,6 +12,7 @@ class Variant < ApplicationRecord
   has_many :reports, dependent: :destroy
 
   validates :piece_count, presence: true, numericality: { greater_than: 0 }
+  validates :product, presence: true
   validate :valid_gtin
   validate :valid_units
 
