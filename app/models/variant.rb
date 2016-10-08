@@ -20,7 +20,7 @@ class Variant < ApplicationRecord
   delegate :category, to: :product
 
   def description
-    VariantDescription.new(self).description
+    product.present? ? VariantDescription.new(self).description : nil
   end
 
   def to_s

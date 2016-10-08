@@ -85,9 +85,16 @@ RSpec.describe Variant, type: :model do
   end
 
   describe '#to_s' do
-    let(:variant) { build(:variant) }
-    subject { variant.to_s }
-    it { is_expected.to be_a String }
-    it { is_expected.to include variant.description }
+    context 'with no product' do
+      subject { Variant.new.to_s }
+      it { is_expected.to be_nil }
+    end
+
+    context 'setup properly' do
+      let(:variant) { build(:variant) }
+      subject { variant.to_s }
+      it { is_expected.to be_a String }
+      it { is_expected.to include variant.description }
+    end
   end
 end
