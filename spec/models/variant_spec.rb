@@ -64,6 +64,17 @@ RSpec.describe Variant, type: :model do
           expect(subject.errors[:units]).to include 'missing unit of measure'
         end
       end
+
+      context 'incompatible units' do
+        let(:category) { create(:category, bulk_units: '1 kg' ) }
+        let(:product) { create(:product, category: category) }
+        subject { build(:variant, product: product, units: '1 ml') }
+        it 'is invalid' do
+          subject.valid?
+          expect(subject.errors).to have_key :units
+          expect(subject.errors[:units]).to include "incompatible with 'kg'"
+        end
+      end
     end
   end
 

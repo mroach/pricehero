@@ -41,7 +41,14 @@ class Variant < ApplicationRecord
     rescue ArgumentError
       return errors.add(:units, 'invalid')
     end
-    errors.add(:units, 'missing unit of measure') if unit.units.blank?
+    return errors.add(:units, 'missing unit of measure') if unit.units.blank?
+
+    if product.present? && category.try(:bulk_units).present?
+      bulk_units = category.bulk_units.to_unit
+      unless unit.compatible?(bulk_units)
+        errors.add(:units, "incompatible with '#{bulk_units.units}'")
+      end
+    end
   end
 
   def should_generate_new_friendly_id?
