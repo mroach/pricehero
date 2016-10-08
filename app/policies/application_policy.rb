@@ -50,4 +50,10 @@ class ApplicationPolicy
       scope
     end
   end
+
+  protected
+
+  def any_role?(*roles)
+    user.present? && roles.map(&:to_sym).include?(user.role.to_sym)
+  end
 end

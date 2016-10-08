@@ -1,7 +1,5 @@
 class ReportPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope
-    end
+  def create?
+    super || any_role?(:reporter, :editor)
   end
 end
