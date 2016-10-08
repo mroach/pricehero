@@ -12,12 +12,19 @@ class BaseResourcesController < ApplicationController
 
   def new
     authorize resource_class
-    instance_variable_set("@#{resource_name}", resource_class.new(resource_params))
+
+    # If the method was overriden and 'resource' was already setup, don't
+    # overwrite it by building it from the parameters
+    build_resource unless resource.present?
   end
 
   def create
     authorize resource_class
-    instance_variable_set("@#{resource_name}", resource_class.new(resource_params))
+
+    # If the method was overriden and 'resource' was already setup, don't
+    # overwrite it by building it from the parameters
+    build_resource unless resource.present?
+
     if resource.save
       respond_with resource, notice: 'Created'
     else
@@ -57,6 +64,10 @@ class BaseResourcesController < ApplicationController
   end
 
   protected
+
+  def build_resource
+    instance_variable_set("@#{resource_name}", resource_class.new(resource_params))
+  end
 
   def resource
     instance_variable_get("@#{resource_name}")

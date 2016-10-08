@@ -1,4 +1,10 @@
 class ReportsController < BaseResourcesController
+  def create
+    build_resource
+    resource.user = current_user
+    super
+  end
+
   protected
 
   def permitted_params
