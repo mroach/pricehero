@@ -1,4 +1,9 @@
 class StoresController < BaseResourcesController
+  def show
+    @prices = ProductsQuery.new(@store).product_prices
+    super
+  end
+
   protected
 
   def permitted_params

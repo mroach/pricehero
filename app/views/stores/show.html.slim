@@ -18,8 +18,8 @@ p
   strong Location description:
   = @store.location_description
 
-- if @store.reports.any?
-  h2 Reports
+- if @prices.any?
+  h2 Products
   table
     thead
       tr
@@ -28,9 +28,9 @@ p
         th Price
         th Unit Price
     tbody
-    - @store.reports.each do |report|
+    - @prices.each do |report|
       tr
-        td = link_to report.variant, report.variant
+        td = link_to report.variant.product, report.variant.product
         td = l report.reported_at, format: :short
         td = report.price.format
         td = report.unit_price
