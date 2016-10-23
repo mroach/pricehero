@@ -511,7 +511,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fog
-  fog-aws
   friendly_id
   fuubar
   gtin

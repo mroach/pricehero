@@ -58,8 +58,7 @@ gem 'closure_tree'
 gem 'country_select'
 
 # Amazon S3
-gem 'fog'
-gem 'fog-aws'
+gem 'fog', require: 'fog/aws'
 
 # Image processing (requires Imagemagick be installed)
 gem 'mini_magick'
