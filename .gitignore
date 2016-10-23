@@ -28,3 +28,4 @@ config/secrets.yml
 
 # Uploads in development mode
 public/uploads
+.env
