@@ -24,7 +24,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'paper_trail', '~> 5.2'
 
 # Doesn't destroy records. Hides them using a deleted_at column
-gem 'paranoia', github: 'rubysherpas/paranoia', branch: 'rails5'
+gem 'paranoia', '~> 2.2'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1'
