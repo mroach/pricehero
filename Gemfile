@@ -68,6 +68,9 @@ gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
 # Amazon S3
 gem 'carrierwave-aws'
 
+# Exception logging
+gem 'rollbar'
+
 group :development, :test do
   # Load ENV vars from .env
   gem 'dotenv-rails'
