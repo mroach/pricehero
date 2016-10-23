@@ -59,14 +59,14 @@ gem 'closure_tree'
 # Country picker
 gem 'country_select'
 
-# Amazon S3
-gem 'fog', require: 'fog/aws'
-
 # Image processing (requires Imagemagick be installed)
 gem 'mini_magick'
 
 # Attachment handler
 gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+
+# Amazon S3
+gem 'carrierwave-aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
