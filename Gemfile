@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby File.read('.ruby-version').strip
+
 # Override the :github shortcut to use SSH to avoid the insecurity of git://
 git_source(:github) { |repo| "git@github.com:#{repo}.git" }
 
