@@ -17,6 +17,8 @@ class Report < ApplicationRecord
 
   after_initialize :set_defaults, unless: :persisted?
 
+  delegate :product, to: :variant
+
   def unit_price
     UnitPriceCalculator.new(
       price,
