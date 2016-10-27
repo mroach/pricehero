@@ -1,10 +1,11 @@
-h1
-  = @product
-
-div
-- if @product.brand.logo.present?
-  = image_tag @product.brand.logo.small
-p by #{link_to @product.brand.name, @product.brand} #{Emoji::flag @product.brand.country}
+h1.ui.header
+  - if @product.brand.logo.present?
+    = image_tag @product.brand.logo.medium, alt: @product.brand.name
+  .content
+    = @product.name
+    .sub.header
+      ' by
+      = link_to @product.brand, @product.brand
 
 p
   strong Category:
@@ -12,13 +13,13 @@ p
 
 - @product.media.each do |m|
   = link_to m.file.large.url do
-    = image_tag m.file.small.url
+    = image_tag m.file.medium.url, class: 'ui small image'
 
 h2 Variants
 
 = link_to 'New Variant', new_variant_path(variant: { product_id: @product.id })
 
-table
+table.ui.celled.table
   thead
     tr
       th Name
@@ -29,10 +30,11 @@ table
     tr
       td = link_to price.variant, price.variant
       - if price.best_price.present?
-        td #{price.best_price.price.format} at #{price.best_price.store}
+        td #{price.best_price.price.format} at #{link_to price.best_price.store, price.best_price.store}
         td = price.best_price.unit_price
-        - if price.variant.piece_count > 1
-          td = price.best_price.piece_price
+        td
+          - if price.variant.piece_count > 1
+            = price.best_price.piece_price
 
 = link_to 'Edit', edit_product_path(@product)
 '|

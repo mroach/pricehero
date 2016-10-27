@@ -3,5 +3,6 @@ h1 Categories
 p
   = link_to 'New Category', new_category_path
 
-- Category.roots.each do |category|
-  = render partial: 'category', locals: { level: 0, category: category }
+.ui.list
+  - Category.roots.each do |category|
+    = render partial: 'category', locals: { category: category }

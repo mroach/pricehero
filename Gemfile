@@ -71,6 +71,11 @@ gem 'carrierwave-aws'
 # Exception logging
 gem 'rollbar'
 
+gem 'turbolinks'
+
+# Easy integration of Bower components with the Rails pipeline
+gem 'bower-rails'
+
 group :development, :test do
   # Load ENV vars from .env
   gem 'dotenv-rails'
@@ -92,11 +97,8 @@ group :development, :test do
 end
 
 group :development do
-  # Use Capistrano for deployment
-  gem 'capistrano-rails'
-
-  # Easy integration of Bower components with the Rails pipeline
-  gem 'bower-rails'
+  # Make the Rails console heaps better
+  gem 'pry-rails'
 
   # Notify about guard results (OS X)
   gem 'terminal-notifier-guard', '~> 1.6'

@@ -1,0 +1,12 @@
+{
+  "name": "dsl-generated-dependencies",
+  "dependencies": {
+    "jquery": "latest",
+    "jquery-ujs": "latest",
+    "semantic-ui": "latest",
+    "turbolinks": "latest",
+    "moment": "latest"
+  },
+  "resolutions": {
+  }
+}

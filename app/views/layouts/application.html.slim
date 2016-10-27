@@ -1,8 +1,10 @@
 doctype html
 html
   head
-    title = [content_for(:title), "Pricehero"].reject(&:blank?).join(' - ')
+    title = page_title
     = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
     = render partial: 'layouts/shared/navigation'

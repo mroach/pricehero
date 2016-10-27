@@ -1,6 +1,9 @@
 h1 Products (#{@products.length})
 
-= link_to 'New Product', new_product_path
+- if policy(:product).new?
+  = link_to new_product_path, class: 'ui primary icon button' do
+    i.plus.icon
+    ' New Product
 
 table
   thead

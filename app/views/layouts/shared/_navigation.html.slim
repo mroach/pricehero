@@ -1,15 +1,36 @@
-span style="background-color: #afa"
-  = link_to t('nav.stores'), stores_path
-  ' ,
-  = link_to t('nav.products'), products_path
+/ Sidebar menu
+.ui.inverted.fixed.main.menu
+  = link_to root_path, class: :item do
+    i.home.icon
+    = t('nav.home')
+  - if user_signed_in?
+    = link_to stores_path, class: :item do
+      i.compass.icon
+      = t('nav.stores')
+    = link_to products_path, class: :item do
+      i.cubes.icon
+      = t('nav.products')
 
-'  --
+    = link_to categories_path, class: :item do
+      i.sitemap.icon
+      = t('nav.categories')
+    = link_to brands_path, class: :item do
+      i.trademark.icon
+      = t('nav.brands')
 
-span style="background-color: #ff2"
-  = link_to t('nav.brands'), brands_path
-  ' ,
-  = link_to t('nav.categories'), categories_path
+    .right.menu
+      .item
+        form action=search_path
+          .ui.transparent.inverted.icon.input
+            input type="search" placeholder="Search" name="q" id="search"
+            i.search.link.icon
+      = link_to '#', class: 'item' do
+        i.user.icon
+        = t('nav.profile')
+      = link_to destroy_user_session_path, method: :delete, class: 'item' do
+        i.sign.out.icon
+        = t('nav.sign_out')
+  - else
+    .item.right
+      = link_to t('nav.sign_in'), new_user_session_path, class: 'ui primary button'
 
-- if user_signed_in?
-  span style="margin-left: 1em" = current_user.name
-  span = link_to 'Log out', destroy_user_session_path

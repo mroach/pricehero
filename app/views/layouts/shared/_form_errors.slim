@@ -1,0 +1,5 @@
+- if model.errors.any?
+  .ui.error.message
+    .header = "#{pluralize(model.errors.count, "error")} need to be fixed:"
+    - model.errors.full_messages.each do |message|
+      p = message

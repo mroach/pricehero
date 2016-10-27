@@ -1,0 +1,7 @@
+asset 'jquery'
+
+asset 'jquery-ujs'
+
+asset 'semantic-ui'
+
+asset 'moment'

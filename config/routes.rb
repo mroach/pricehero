@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :product_media
   resources :variants
   resources :reports
+
+  get 'search', to: 'search#index', as: 'search'
 end

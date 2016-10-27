@@ -1,14 +1,32 @@
-- if @brand.logo.present?
-  = image_tag @brand.logo.medium, alt: @brand.name
 
-h1 #{@brand.name} #{Emoji.flag @brand.country}
+- if policy(@brand).edit?
+  = link_to edit_brand_path(@brand), class: 'ui secondary icon button'
+    i.edit.icon
+    = t(:edit)
+
+h1.ui.header
+  - if @brand.logo.present?
+    = image_tag @brand.logo.medium, alt: @brand.name
+  .content
+    = @brand.name
+    - if @brand.country.present?
+      .sub.header
+        = "Products of #{country_description @brand.country} #{Emoji.flag @brand.country}"
+
 
 h2 Products
-= link_to 'Add Product', new_product_path(product: { brand_id: @brand.id })
+- if policy(:product).new?
+  = link_to new_product_path(product: { brand_id: @brand.id }), class: 'ui primary icon button' do
+    i.plus.icon
+    = 'New Product'
 
-ul
-- @brand.products.each do |product|
-  li = link_to product, product
+.ui.divided.items
+  - @brand.products.each do |product|
+    = link_to product, class: 'item' do
+      - if product.media.any?
+        .image = image_tag product.media.first.file.medium.url
+      .content
+        .header = product.name
 
 = link_to 'Edit', edit_brand_path(@brand)
 '|
