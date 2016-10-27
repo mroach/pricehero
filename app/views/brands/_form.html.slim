@@ -17,7 +17,7 @@
     - if @brand.logo.present?
       p = image_tag @brand.logo.thumb
       p Replace with new logo:
-    = f.file_field :logo
+    = f.file_field :logo, accept: 'image/*'
     = f.hidden_field :logo_cache
 
   .actions = f.submit
