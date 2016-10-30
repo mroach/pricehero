@@ -13,6 +13,10 @@ class Category < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :valid_units
 
+  def path(separator = ' > ')
+    self_and_ancestors.select(:name).reverse.pluck(:name).join(separator)
+  end
+
   def to_s
     name
   end

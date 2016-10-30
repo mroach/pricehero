@@ -41,6 +41,18 @@ RSpec.describe Category, type: :model do
     end
   end
 
+  describe '#path' do
+    let(:parent) { create(:category) }
+    let(:child) { create(:category, parent: parent) }
+    subject { child.path }
+
+    context 'default separator' do
+      it { is_expected.to be_a String }
+      it { is_expected.to start_with parent.name }
+      it { is_expected.to end_with child.name }
+    end
+  end
+
   describe '#to_s' do
     let(:category) { build(:category) }
     subject { category.to_s }
