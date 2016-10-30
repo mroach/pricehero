@@ -6,6 +6,6 @@ h1 Search results for "#{@query}"
   - if policy(:product).new?
     p Perhaps you'd like to #{link_to 'add a product', new_product_path}?
 - @results.group_by(&:searchable_type).each do |key, results|
-  h2 = key
+  h2 = "#{key.pluralize} (#{results.length})"
   - results.each do |result|
     p = link_to result.searchable, result.searchable
