@@ -1,10 +1,12 @@
 # Product brands
 class Brand < ApplicationRecord
+  include PgSearch
   extend FriendlyId
 
   acts_as_paranoid
   has_paper_trail
   friendly_id :name, use: :slugged
+  multisearchable against: :name, unless: :deleted?
 
   has_many :products
 

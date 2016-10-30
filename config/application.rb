@@ -17,6 +17,9 @@ Bundler.require(*Rails.groups)
 
 module PriceHero
   class Application < Rails::Application
+    Rails.application.configure do
+      config.active_record.schema_format = :sql
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

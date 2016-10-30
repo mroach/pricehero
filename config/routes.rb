@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resources :variants
   resources :reports
 
-  get 'search', to: 'search#index', as: 'search'
+  get 'search', to: 'search#multi', as: 'search'
 end

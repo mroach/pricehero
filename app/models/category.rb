@@ -1,10 +1,12 @@
 # Product categories
 class Category < ApplicationRecord
+  include PgSearch
   extend FriendlyId
 
   has_paper_trail
   has_closure_tree order: :name
   friendly_id :name, use: :slugged
+  multisearchable against: :name
 
   has_many :products
 

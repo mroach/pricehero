@@ -73,6 +73,9 @@ gem 'rollbar'
 
 gem 'turbolinks'
 
+# Advanced text searching
+gem 'pg_search'
+
 # Easy integration of Bower components with the Rails pipeline
 gem 'bower-rails'
 
