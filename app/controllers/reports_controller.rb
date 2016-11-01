@@ -10,4 +10,8 @@ class ReportsController < BaseResourcesController
   def permitted_params
     %i(store_id variant_id reported_at price)
   end
+
+  def after_create_path
+    @report.variant
+  end
 end

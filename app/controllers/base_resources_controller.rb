@@ -26,7 +26,7 @@ class BaseResourcesController < ApplicationController
     build_resource unless resource.present?
 
     if resource.save
-      respond_with resource, notice: 'Created'
+      respond_with after_create_path, notice: 'Created'
     else
       respond_with resource do |format|
         format.html { render :new }
@@ -39,7 +39,7 @@ class BaseResourcesController < ApplicationController
     authorize resource
     if resource.update(resource_params)
       respond_with resource do |format|
-        format.html { redirect_to resource, notice: 'Updated' }
+        format.html { redirect_to after_update_path, notice: 'Updated' }
         format.json { render json: resource }
       end
     else
@@ -58,12 +58,24 @@ class BaseResourcesController < ApplicationController
     authorize resource
     resource.destroy
     respond_with resource do |format|
-      format.html { redirect_to resource_index_locator, notice: 'Destroyed' }
+      format.html { redirect_to after_destroy_path, notice: 'Destroyed' }
       format.json { render status: :no_content }
     end
   end
 
   protected
+
+  def after_destroy_path
+    resource_index_locator
+  end
+
+  def after_update_path
+    resource
+  end
+
+  def after_create_path
+    resource
+  end
 
   def build_resource
     instance_variable_set("@#{resource_name}", resource_class.new(resource_params))
