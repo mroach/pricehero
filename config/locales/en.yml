@@ -1,5 +1,6 @@
 en:
   site_title: 'Pricehero'
+  timezone: 'Asia/Bangkok'
   nav:
     brands: Brands
     categories: Categories

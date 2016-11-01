@@ -16,6 +16,12 @@ module ApplicationHelper
     end
   end
 
+  def timeago(time)
+    title = l(time.in_time_zone(t(:timezone)), format: :long)
+    timestamp = time.strftime('%F %R')
+    content_tag(:time, timestamp, 'data-timestamp': timestamp, title: title)
+  end
+
   def page_title
     [content_for(:title), I18n.t(:site_title)].reject(&:blank?).join(' - ')
   end

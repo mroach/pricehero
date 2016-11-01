@@ -27,13 +27,13 @@ p
     thead
       tr
         th Product
-        th Reported at
+        th Reported
         th Price
         th Unit Price
     tbody
     - @prices.each do |report|
       tr
         td = link_to report.variant.product, report.variant.product
-        td = l report.reported_at, format: :short
+        td = timeago report.reported_at
         td = report.price.format
         td = report.unit_price
