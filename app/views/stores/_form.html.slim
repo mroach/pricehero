@@ -1,39 +1,16 @@
-= form_for @store do |f|
-  - if @store.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@store.errors.count, "error")} prohibited this store from being saved:"
-      ul
-        - @store.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :alternate_name
-    = f.text_field :alternate_name
-  .field
-    = f.label :latitude
-    = f.text_field :latitude
-  .field
-    = f.label :longitude
-    = f.text_field :longitude
-  .field
-    = f.label :address
-    = f.text_field :address
-  .field
-    = f.label :locality
-    = f.text_field :locality
-  .field
-    = f.label :state_province
-    = f.text_field :state_province
-  .field
-    = f.label :postal_code
-    = f.text_field :postal_code
-  .field
-    = f.label :country
-    = f.text_field :country
-  .field
-    = f.label :location_description
-    = f.text_field :location_description
-  .actions = f.submit
+= simple_form_for @store do |f|
+  .ui.segments
+    .ui.segment
+      = f.input :name
+      = f.input :alternate_name
+      = f.input :latitude
+      = f.input :longitude
+      = f.input :address
+      = f.input :locality
+      = f.input :state_province
+      = f.input :postal_code
+      = f.input :country
+      = f.input :location_description
+    .ui.bottom.attached.segment
+      = f.button :submit
+      = link_to t('buttons.cancel'), [@store], class: 'ui red button'

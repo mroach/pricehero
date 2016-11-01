@@ -1,20 +1,14 @@
-h1 Products (#{@products.length})
+h1 Products
 
-- if policy(:product).new?
-  = link_to new_product_path, class: 'ui primary icon button' do
-    i.plus.icon
-    ' New Product
+p = new_record_button
 
-table
-  thead
-    tr
-      th Brand
-      th Name
-      th Category
-
-  tbody
-    - @products.each do |product|
-      tr
-        td = link_to product.brand.name, product.brand
-        td = link_to product.name, product
-        td = link_to product.category, product.category
+- @products.group_by(&:brand).each do |brand, products|
+  h2 = brand.name
+  .ui.relaxed.celled.list
+    - products.each do |product|
+      .item
+        - url = product.media.any? ? product.media.first.file.thumb.url : image_path('fallbacks/thumb_product-image.png')
+        = image_tag url, class: 'ui avatar image'
+        .content
+          .header = link_to product.name, product
+          .description = product.category.path

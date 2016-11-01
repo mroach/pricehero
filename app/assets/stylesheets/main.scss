@@ -1,3 +1,30 @@
 main {
   padding: 50px 10px;
 }
+
+.initials {
+  background-color: #999;
+  color: white;
+  border-radius: 500rem;
+  height: 2.5em;
+  width: 2.5em;
+  line-height: 2.5em;
+  text-align: center;
+
+  &.small { font-size: 24px; }
+  &.large { font-size: 32px; }
+}
+
+.brand { width: 300px; display: inline-block; }
+
+// TODO: This is gross. It should be a table or grid but it doesn't work
+//       properly with the Semantic UI form styling because it requires that
+//       elements be direct descendants.
+.ui.form {
+  .inline.field {
+    label { width: 12em; text-align: right }
+  }
+  .inline.fields {
+    .field > .selection.dropdown { width: 100%; }
+  }
+}

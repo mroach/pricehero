@@ -1,5 +1,8 @@
-h1 = @variant
-h2 = link_to @variant.product, @variant.product
+h1.ui.header
+  = @variant
+  .sub.header = link_to @variant.product, @variant.product
+
+p = edit_record_button(@variant)
 
 p
   strong GTIN:
@@ -13,7 +16,7 @@ p
 h2 Reports
 
 - if @variant.reports.any?
-  table
+  table.ui.celled.table
     thead
       tr
         th Store
@@ -35,7 +38,3 @@ h2 Reports
 h3 New price report
 
 = render partial: 'reports/form'
-
-= link_to 'Edit', edit_variant_path(@variant)
-'|
-= link_to 'Back', product_path(@variant.product)

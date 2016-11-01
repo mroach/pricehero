@@ -1,21 +1,12 @@
-= form_for @product do |f|
-  - if @product.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-      ul
-        - @product.errors.full_messages.each do |message|
-          li = message
-  .field
-    = f.label :brand
-    = f.collection_select :brand_id, Brand.all, :id, :name, { include_blank: '-- Pick --' }
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :category
-    = f.select :category_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: '-- Pick --' }
-  .actions = f.submit
-
+= simple_form_for @product do |f|
+  .ui.segments
+    .ui.segment
+      = f.association :brand, collection: @brands
+      = f.input :name
+      = f.association :category, collection: @categories
+    .ui.bottom.attached.segment
+      = f.button :submit
+      = link_to t('buttons.cancel'), [@product], class: 'ui red button'
 
 - if @product.persisted?
   p = link_to 'Add image', new_product_medium_path(product_medium: { product_id: @product.id })

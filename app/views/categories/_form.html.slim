@@ -1,18 +1,9 @@
-= form_for @category do |f|
-  - if @category.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@category.errors.count, "error")} prohibited this category from being saved:"
-      ul
-        - @category.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :parent_id
-    = f.select :parent_id, Category.all.collect { |c| [c.self_and_ancestors.reverse.map(&:name).join(' > '), c.id] }.sort, { include_blank: 'None'}
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :bulk_units
-    = f.text_field :bulk_units
-  .actions = f.submit
+= simple_form_for @category do |f|
+  .ui.segments
+    .ui.segment
+      = f.association :parent, collection: @categories
+      = f.input :name
+      = f.input :bulk_units
+    .ui.bottom.attached.segment
+      = f.button :submit
+      = link_to t('buttons.cancel'), [@category], class: 'ui red button'

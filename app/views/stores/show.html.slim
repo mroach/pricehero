@@ -1,4 +1,7 @@
-h1 = @store
+h1
+  = @store
+
+= edit_record_button(@store)
 
 p
   strong Alternate name:
@@ -20,7 +23,7 @@ p
 
 - if @prices.any?
   h2 Products
-  table
+  table.ui.celled.table
     thead
       tr
         th Product
@@ -34,7 +37,3 @@ p
         td = l report.reported_at, format: :short
         td = report.price.format
         td = report.unit_price
-
-= link_to 'Edit', edit_store_path(@store)
-'|
-= link_to 'Back', stores_path

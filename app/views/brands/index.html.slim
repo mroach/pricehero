@@ -1,20 +1,15 @@
 h1 Brands
 
-= link_to 'New Brand', new_brand_path
+p = new_record_button
 
-table
-  thead
-    tr
-      th Name
-      th Country
-      th Products
-      th
-
-  tbody
-    - @brands.each do |brand|
-      tr
-        td = link_to brand.name, brand
-        td = Emoji.flag brand.country
-        td = brand.products.count
-        td
-          = image_tag brand.logo.thumb.url if brand.logo.present?
+- @brands.each do |brand|
+  h3.ui.header.brand
+    - if brand.logo.present?
+      = image_tag brand.logo.medium, alt: brand.name
+    - else
+      .initials.image = brand.initials
+    .content
+      = link_to brand.name, brand
+      - if brand.country.present?
+        .sub.header
+          = "#{brand.products_count} #{Product.model_name.human(count: brand.products_count).downcase}"

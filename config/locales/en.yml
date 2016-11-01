@@ -5,3 +5,17 @@ en:
     categories: Categories
     prodcuts: Products
     stores: Stores
+  buttons:
+    new_record: 'New %{type}'
+    cancel: 'Cancel'
+  activerecord:
+    models:
+      product:
+        one: Product
+        other: Products
+      brands:
+        one: Brand
+        other: Brands
+      variants:
+        one: Variant
+        other: Variants

@@ -28,6 +28,29 @@ RSpec.describe Brand, type: :model do
     end
   end
 
+  describe '#initials' do
+    subject { described_class.new(name: name).initials }
+    context 'one word' do
+      let(:name) { 'Derp' }
+      it { is_expected.to eq 'D' }
+    end
+
+    context 'two words' do
+      let(:name) { 'Aslan Mega' }
+      it { is_expected.to eq 'AM' }
+    end
+
+    context 'two words and a symbol' do
+      let(:name) { 'Bashir & Kira' }
+      it { is_expected.to eq 'B&K' }
+    end
+
+    context 'lowercase name' do
+      let(:name) { 'praveline' }
+      it { is_expected.to eq 'P' }
+    end
+  end
+
   describe '#to_s' do
     subject { build(described_class.model_name.singular) }
     its(:to_s) { is_expected.to eq subject.name }

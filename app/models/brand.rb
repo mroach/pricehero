@@ -16,6 +16,10 @@ class Brand < ApplicationRecord
 
   default_scope -> { order('name') }
 
+  def initials
+    name.split.map(&:first).join.upcase
+  end
+
   def to_s
     name
   end

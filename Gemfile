@@ -79,6 +79,9 @@ gem 'pg_search'
 # Easy integration of Bower components with the Rails pipeline
 gem 'bower-rails'
 
+# Form builder
+gem 'simple_form'
+
 group :development, :test do
   # Load ENV vars from .env
   gem 'dotenv-rails'

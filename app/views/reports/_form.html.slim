@@ -1,16 +1,9 @@
-= form_for @report do |f|
-  - if @report.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@report.errors.count, "error")} prohibited this report from being saved:"
-      ul
-        - @report.errors.full_messages.each do |message|
-          li = message
-
+= form_for @report, html: { class: 'ui form' } do |f|
   = f.hidden_field :variant_id
-  .field
-    = f.label :store
-    = f.collection_select :store_id, Store.all, :id, :combined_name, { include_blank: '-- Pick --' }
-  .field
-    = f.label :price
-    = f.text_field :price
-  .actions = f.submit
+  .inline.fields
+    .eight.wide.field
+      = f.collection_select :store_id, Store.all, :id, :combined_name, { include_blank: '-- Pick Store --' }, class: 'ui search dropdown'
+    .four.wide.field
+      = f.text_field :price, placeholder: 'Price', value: nil
+    .four.wide.field
+      = f.submit 'Submit', class: 'ui primary button'

@@ -1,18 +1,16 @@
 
-- if policy(@brand).edit?
-  = link_to edit_brand_path(@brand), class: 'ui secondary icon button'
-    i.edit.icon
-    = t(:edit)
-
 h1.ui.header
   - if @brand.logo.present?
     = image_tag @brand.logo.medium, alt: @brand.name
+  - else
+    .initials.image = @brand.initials
   .content
     = @brand.name
     - if @brand.country.present?
       .sub.header
         = "Products of #{country_description @brand.country} #{Emoji.flag @brand.country}"
 
+p = edit_record_button @brand
 
 h2 Products
 - if policy(:product).new?

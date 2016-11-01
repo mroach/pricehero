@@ -1,27 +1,9 @@
 h1 Stores
 
-= link_to 'New Store', new_store_path
+p = new_record_button
 
-table
-  thead
-    tr
-      th Name
-      th Alternate name
-      th Address
-      th Locality
-      th State province
-      th Postal code
-      th Country
-      th Location description
-
-  tbody
-    - @stores.each do |store|
-      tr
-        td = link_to store.name, store
-        td = store.alternate_name
-        td = store.address
-        td = store.locality
-        td = store.state_province
-        td = store.postal_code
-        td = store.country
-        td = store.location_description
+.ui.relaxed.divided.list
+  - @stores.each do |store|
+    .item
+      .content
+        .header = link_to store.name, store

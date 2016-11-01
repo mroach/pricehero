@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :stores
   resources :products
   resources :product_media
-  resources :variants
+  resources :variants, except: %i(index)
   resources :reports
 
   get 'search', to: 'search#multi', as: 'search'
