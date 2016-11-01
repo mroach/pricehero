@@ -10,8 +10,8 @@ class Product < ApplicationRecord
   mount_uploaders :images, ProductImageUploader
   multisearchable against: :description, unless: :deleted?
 
-  belongs_to :brand
-  belongs_to :category
+  belongs_to :brand, counter_cache: true
+  belongs_to :category, counter_cache: true
   has_many :variants, dependent: :destroy
   has_many :media, class_name: ProductMedium
 

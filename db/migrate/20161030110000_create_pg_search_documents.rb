@@ -7,7 +7,16 @@ class CreatePgSearchDocuments < ActiveRecord::Migration
         t.timestamps null: false
       end
 
-      execute 'CREATE INDEX index_pg_search_docments_on_content ON pg_search_documents USING gin (content gin_trgm_ops)'
+      execute <<-'SQL'
+      CREATE INDEX index_pg_search_docments_on_content_trgm
+        ON pg_search_documents
+        USING gin (content gin_trgm_ops)
+      SQL
+      execute <<-'SQL'
+      CREATE INDEX index_pg_search_docments_on_content_ts
+        ON pg_search_documents
+        USING gin (to_tsvector('english', content))
+      SQL
     end
   end
 

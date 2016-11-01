@@ -8,7 +8,7 @@ class Variant < ApplicationRecord
   has_paper_trail
   friendly_id :description, use: :slugged
 
-  belongs_to :product
+  belongs_to :product, counter_cache: true
   has_many :reports, dependent: :destroy
 
   validates :piece_count, presence: true, numericality: { greater_than: 0 }

@@ -8,7 +8,7 @@ RSpec.describe Variant, type: :model do
   end
 
   describe 'Associations' do
-    it { is_expected.to belong_to :product }
+    it { is_expected.to belong_to(:product).counter_cache(true) }
     it { is_expected.to have_many(:reports).dependent(:destroy) }
   end
 

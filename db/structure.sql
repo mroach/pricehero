@@ -110,7 +110,8 @@ CREATE TABLE brands (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted_at timestamp without time zone,
-    logo character varying
+    logo character varying,
+    products_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -145,7 +146,8 @@ CREATE TABLE categories (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted_at timestamp without time zone,
-    parent_id integer
+    parent_id integer,
+    products_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -330,7 +332,8 @@ CREATE TABLE products (
     slug character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    variants_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -770,6 +773,13 @@ CREATE INDEX index_brands_on_deleted_at ON brands USING btree (deleted_at);
 
 
 --
+-- Name: index_brands_on_products_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_brands_on_products_count ON brands USING btree (products_count);
+
+
+--
 -- Name: index_brands_on_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -781,6 +791,13 @@ CREATE UNIQUE INDEX index_brands_on_slug ON brands USING btree (slug);
 --
 
 CREATE INDEX index_categories_on_deleted_at ON categories USING btree (deleted_at);
+
+
+--
+-- Name: index_categories_on_products_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_categories_on_products_count ON categories USING btree (products_count);
 
 
 --
@@ -900,6 +917,13 @@ CREATE INDEX index_products_on_deleted_at ON products USING btree (deleted_at);
 --
 
 CREATE UNIQUE INDEX index_products_on_slug ON products USING btree (slug);
+
+
+--
+-- Name: index_products_on_variants_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_products_on_variants_count ON products USING btree (variants_count);
 
 
 --
@@ -1070,6 +1094,6 @@ ALTER TABLE ONLY products
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160804144444'), ('20160927155811'), ('20160927161852'), ('20160927163348'), ('20160927163429'), ('20160929135128'), ('20160929135129'), ('20160929183122'), ('20160930122029'), ('20160930175101'), ('20161001032513'), ('20161001050222'), ('20161001051449'), ('20161003145947'), ('20161003154430'), ('20161003160243'), ('20161004144513'), ('20161004150406'), ('20161004152627'), ('20161005133159'), ('20161005164447'), ('20161006015436'), ('20161006025817'), ('20161030034355'), ('20161030110000');
+INSERT INTO schema_migrations (version) VALUES ('20160804144444'), ('20160927155811'), ('20160927161852'), ('20160927163348'), ('20160927163429'), ('20160929135128'), ('20160929135129'), ('20160929183122'), ('20160930122029'), ('20160930175101'), ('20161001032513'), ('20161001050222'), ('20161001051449'), ('20161003145947'), ('20161003154430'), ('20161003160243'), ('20161004144513'), ('20161004150406'), ('20161004152627'), ('20161005133159'), ('20161005164447'), ('20161006015436'), ('20161006025817'), ('20161030034355'), ('20161030110000'), ('20161101064842');
 
 
